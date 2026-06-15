@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⭐ My School Worksheets – 500 Questions</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap');
+:root{--green:#6BCB77;--blue:#4D96FF;--pink:#FF6B9D;--red:#FF4757;--purple:#9B59B6;--bg:#FFF8EE;--text:#2C3E50;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);}
+header{background:linear-gradient(135deg,#667eea,#764ba2);color:white;text-align:center;padding:20px 14px 16px;}
+header h1{font-family:'Fredoka One',cursive;font-size:1.9rem;}
+header p{font-size:.85rem;opacity:.9;margin-top:3px;}
+#score-banner{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:10px;background:white;border-bottom:3px solid #EEE;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.08);}
+.score-pill{padding:6px 14px;border-radius:50px;font-weight:800;font-size:.85rem;cursor:pointer;}
+.score-pill.english{background:#FEE8F0;color:var(--pink);border:2px solid var(--pink);}
+.score-pill.maths{background:#E8F4FE;color:var(--blue);border:2px solid var(--blue);}
+.score-pill.clock{background:#EAFBEA;color:var(--green);border:2px solid var(--green);}
+.score-pill.total{background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;}
+.tabs{display:flex;background:white;border-bottom:3px solid #EEE;overflow-x:auto;}
+.tab-btn{flex:1;min-width:80px;padding:12px 6px;border:none;background:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;color:#999;border-bottom:4px solid transparent;white-space:nowrap;}
+.tab-btn.active{color:var(--text);border-bottom-color:currentColor;}
+.tab-btn.english.active{color:var(--pink);}
+.tab-btn.maths.active{color:var(--blue);}
+.tab-btn.clock.active{color:var(--green);}
+.section{display:none;padding:16px 12px 40px;max-width:820px;margin:0 auto;}
+.section.active{display:block;}
+.sec-title{font-family:'Fredoka One',cursive;font-size:1.6rem;margin-bottom:14px;}
+.q-card{background:white;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-left:5px solid transparent;transition:all .25s;}
+.q-card.english-card{border-left-color:var(--pink);}
+.q-card.maths-card{border-left-color:var(--blue);}
+.q-card.clock-card{border-left-color:var(--green);}
+.q-card.correct{background:#F0FFF4;border-left-color:var(--green)!important;}
+.q-card.wrong{background:#FFF5F5;border-left-color:var(--red)!important;}
+.q-num{font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.4;margin-bottom:4px;}
+.q-text{font-size:1rem;font-weight:700;margin-bottom:10px;line-height:1.5;}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.cb{padding:10px 11px;border-radius:9px;border:2.5px solid #E0E0E0;background:#FAFAFA;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .18s;text-align:left;}
+.cb:hover:not(:disabled){border-color:var(--blue);background:#E8F4FE;}
+.cb.ca{border-color:var(--green);background:#E6F9ED;color:#1A7F37;}
+.cb.wa{border-color:var(--red);background:#FFF0F0;color:var(--red);}
+.cb:disabled{cursor:default;}
+.ti{width:100%;padding:10px 12px;border-radius:9px;border:2.5px solid #E0E0E0;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;}
+.ti:focus{outline:none;border-color:var(--blue);}
+.ti.correct{border-color:var(--green);background:#E6F9ED;}
+.ti.wrong{border-color:var(--red);background:#FFF0F0;}
+.fb{margin-top:8px;padding:8px 12px;border-radius:7px;font-weight:700;font-size:.88rem;display:none;}
+.fb.show{display:block;}
+.fb.correct{background:#D4EDDA;color:#155724;}
+.fb.wrong{background:#F8D7DA;color:#721C24;}
+.mb{margin-top:10px;padding:8px 18px;border-radius:50px;border:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:pointer;background:linear-gradient(135deg,#667eea,#764ba2);color:white;}
+.mb:hover{opacity:.88;}
+.sec-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.ab{padding:10px 22px;border-radius:50px;border:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;cursor:pointer;}
+.ab.ma{background:linear-gradient(135deg,#11998e,#38ef7d);color:#054;}
+.ab.rs{background:#F0F0F0;color:#666;}
+.clock-wrap{display:flex;justify-content:center;margin-bottom:10px;}
+.res{display:none;text-align:center;padding:20px;background:linear-gradient(135deg,#FFD93D,#FF9F43);border-radius:12px;margin-top:20px;color:white;font-family:'Fredoka One',cursive;}
+.res.show{display:block;}
+.res .stars{font-size:1.6rem;}
+.res .msg{font-size:1.4rem;margin-top:4px;}
+.res .sub{font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;opacity:.9;margin-top:4px;}
+.bn{font-size:1.3rem;font-weight:900;}
+.hl{color:var(--purple);}
+.dig{font-family:monospace;background:#111;color:#0f0;padding:4px 10px;border-radius:5px;font-size:1.2rem;}
+@media(max-width:480px){.choices{grid-template-columns:1fr;}}
+
+.tab-btn.results.active{color:#764ba2;}
+.r-card{background:white;border-radius:10px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-left:5px solid #ddd;font-size:.92rem;}
+.r-card.r-correct{border-left-color:#6BCB77;background:#F0FFF4;}
+.r-card.r-wrong{border-left-color:#FF4757;background:#FFF5F5;}
+.r-card.r-skip{border-left-color:#ccc;background:#fafafa;}
+.r-label{font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.45;margin-bottom:4px;}
+.r-q{font-weight:700;margin-bottom:6px;line-height:1.4;}
+.r-ans{font-size:.88rem;margin-top:4px;}
+.r-ans span{font-weight:800;}
+.r-section-head{font-family:'Fredoka One',cursive;font-size:1.2rem;margin:18px 0 10px;padding-bottom:6px;border-bottom:3px solid #EEE;}
+.sum-pill{padding:8px 16px;border-radius:50px;font-weight:800;font-size:.88rem;color:white;}
+
+</style>
+</head>
+<body>
+<header>
+  <h1>⭐ My School Worksheets</h1>
+  <p>500 Questions · English · Maths · Telling the Time · Age 7 / Year 2</p>
+</header>
+<div id="score-banner">
+  <div class="score-pill english" onclick="switchTab('english')">📖 English: <span id="eng-score">0/0</span></div>
+  <div class="score-pill maths"   onclick="switchTab('maths')">🔢 Maths: <span id="math-score">0/0</span></div>
+  <div class="score-pill clock"   onclick="switchTab('clock')">🕐 Clock: <span id="clock-score">0/0</span></div>
+  <div class="score-pill total">🏆 Total: <span id="total-score">0/0</span></div>
+</div>
+<div class="tabs">
+  <button class="tab-btn english active" onclick="switchTab('english')">📖 English (200)</button>
+  <button class="tab-btn maths"          onclick="switchTab('maths')">🔢 Maths (200)</button>
+  <button class="tab-btn clock"          onclick="switchTab('clock')">🕐 Clock (100)</button>
+  <button class="tab-btn results"        onclick="switchTab('results')">📋 Results</button>
+</div>
+
+<!-- ==================== RESULTS ==================== -->
+<div id="results" class="section">
+<div class="sec-title" style="color:#764ba2">📋 Results</div>
+<div id="results-summary" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+  <button class="ab ma" onclick="saveToFirebase()">💾 Save Results</button>
+  <button class="ab" style="background:#E8F4FE;color:#4D96FF;border:2px solid #4D96FF;" onclick="loadFromFirebase()">📥 Load Last Save</button>
+  <button class="ab rs" onclick="showResults()">🔄 Refresh</button>
+</div>
+<div style="margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+  <label style="font-weight:800;">Child Name:</label>
+  <input type="text" id="child-name" class="ti" style="max-width:200px;" placeholder="e.g. Mohammed">
+</div>
+<div id="firebase-status" style="margin-bottom:12px;font-weight:700;font-size:.9rem;color:#667eea;"></div>
+<div id="results-list"></div>
+</div>
+
+<!-- ==================== ENGLISH 200 ==================== -->
+<div id="english" class="section active">
+<div class="sec-title" style="color:var(--pink)">📖 English — 200 Questions</div>
+<div class="sec-actions">
+  <button class="ab ma" onclick="markAll('english')">✅ Mark All</button>
+  <button class="ab rs" onclick="resetSection('english')">🔄 Reset</button>
+</div>
+<div id="english-qs"></div>
+<div class="res" id="eng-result"><div class="stars" id="eng-stars"></div><div class="msg" id="eng-msg"></div><div class="sub" id="eng-sub"></div></div>
+</div>
+
+<!-- ==================== MATHS 200 ==================== -->
+<div id="maths" class="section">
+<div class="sec-title" style="color:var(--blue)">🔢 Maths — 200 Questions</div>
+<div class="sec-actions">
+  <button class="ab ma" onclick="markAll('maths')">✅ Mark All</button>
+  <button class="ab rs" onclick="resetSection('maths')">🔄 Reset</button>
+</div>
+<div id="maths-qs"></div>
+<div class="res" id="math-result"><div class="stars" id="math-stars"></div><div class="msg" id="math-msg"></div><div class="sub" id="math-sub"></div></div>
+</div>
+
+<!-- ==================== CLOCK 100 ==================== -->
+<div id="clock" class="section">
+<div class="sec-title" style="color:var(--green)">🕐 Telling the Time — 100 Questions</div>
+<div class="sec-actions">
+  <button class="ab ma" onclick="markAll('clock')">✅ Mark All</button>
+  <button class="ab rs" onclick="resetSection('clock')">🔄 Reset</button>
+</div>
+<div id="clock-qs"></div>
+<div class="res" id="clock-result"><div class="stars" id="clock-stars"></div><div class="msg" id="clock-msg"></div><div class="sub" id="clock-sub"></div></div>
+</div>
+
+<script type="module">
+// ============================================================
+// QUESTION DATA
+// type: 'mc' = multiple choice, 'text' = typed answer
+// correct: for mc use index 0-3; for text use array of accepted strings
+// ============================================================
+
+const ENGLISH_DATA = [
+// --- SPELLING (60) ---
+{t:'mc',q:'Choose the correct spelling:',opts:['frend','freind','friend','friand'],c:2,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['becaus','becase','becuase','because'],c:3,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['wensday','Wendsday','Wednesday','Wednessday'],c:2,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: peple / peeple / people',c:['people'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: wich / which / whitch',c:['which'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: agen / agian / again',c:['again'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: said / saed / siad',c:['said'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: littel / little / litle',c:['little'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['thay','they','thet','thei'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['wher','were','werre','wher'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['went','wnet','wentt','wen'],c:0,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['coud','coud','could','cuold'],c:2,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: woud / would / wuold',c:['would'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: ther / thier / their',c:['their'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: dose / does / deos',c:['does'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['some','somm','soem','sam'],c:0,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['caled','called','cauled','callled'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['mony','monny','money','monie'],c:2,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: evry / every / evrry',c:['every'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: alweys / allways / always',c:['always'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['hous','housse','house','howse'],c:2,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['water','watter','watr','weter'],c:0,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['scool','skool','school','shcool'],c:2,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: peple / people / peopl',c:['people'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: togethr / together / togther',c:['together'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['meny','manny','meny','many'],c:3,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['any','eny','anny','aney'],c:0,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['difrent','different','diferent','differnt'],c:1,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: sinse / since / scince',c:['since'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: thought / thort / thougt',c:['thought'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['through','throo','throug','throough'],c:0,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['belive','believe','beleive','beleave'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling of the day:',opts:['Saterday','Satturday','Saturday','Saturdy'],c:2,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling of the day:',opts:['Thirsday','Thursday','Thurday','Thersday'],c:1,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: Janyuary / January / Janury',c:['january'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: Febuary / February / Feburary',c:['february'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['buetiful','beautiful','beatiful','beutiful'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['gardun','gardin','garden','gardan'],c:2,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['elefant','elephnat','elephant','elaphant'],c:2,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: animel / animal / animall',c:['animal'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['befor','before','befour','bfore'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['after','aftar','aftir','aftor'],c:0,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: arownd / around / arond',c:['around'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: importent / important / importint',c:['important'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['probly','probably','probabaly','proberly'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['becoming','becoming','becomming','becomeing'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['running','runing','runnig','runningg'],c:0,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: happyness / happiness / hapiness',c:['happiness'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: siting / sitting / sittting',c:['sitting'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['jumped','jumpped','jummped','jmped'],c:0,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['looked','lokked','lookked','luked'],c:0,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['played','plaied','plyaed','playyed'],c:0,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: laught / laughed / laffed',c:['laughed'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: cride / cryed / cried',c:['cried'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['stoped','stopped','stoppped','stooped'],c:1,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['puting','puiting','putting','puttting'],c:2,cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['hopeing','hoppping','hoping','hopping'],c:2,cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: realy / really / reelly',c:['really'],cat:'Spelling'},
+{t:'text',q:'Type the correct spelling of: wriht / write / rihgt',c:['write'],cat:'Spelling'},
+{t:'mc',q:'Choose the correct spelling:',opts:['knoew','knew','knwe','kniew'],c:1,cat:'Spelling'},
+
+// --- PHONICS (30) ---
+{t:'mc',q:'Which word has the long "ee" sound?',opts:['bed','ten','tree','set'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word has the long "oo" sound?',opts:['book','log','top','moon'],c:3,cat:'Phonics'},
+{t:'mc',q:'Which word has the short "a" sound?',opts:['cake','rain','cat','play'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word has the long "a" sound?',opts:['hat','bat','rain','pan'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word has the "ch" sound?',opts:['shop','chair','shell','shoe'],c:1,cat:'Phonics'},
+{t:'mc',q:'Which word has the "sh" sound?',opts:['church','chip','ship','cheese'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word has the "th" sound?',opts:['that','cat','hat','bat'],c:0,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "dog"?',opts:['dug','dig','log','lag'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "cat"?',opts:['cup','hat','bus','big'],c:1,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "night"?',opts:['like','nine','light','nest'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "moon"?',opts:['man','mat','mud','spoon'],c:3,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "cake"?',opts:['lake','lick','lock','luck'],c:0,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "hop"?',opts:['hip','hap','hep','stop'],c:3,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "rain"?',opts:['run','train','ruin','tin'],c:1,cat:'Phonics'},
+{t:'mc',q:'Which word rhymes with "bell"?',opts:['ball','bill','sell','bull'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word has a silent letter?',opts:['cat','know','hat','run'],c:1,cat:'Phonics'},
+{t:'mc',q:'Which word starts with a vowel sound?',opts:['big','fast','egg','jump'],c:2,cat:'Phonics'},
+{t:'mc',q:'How many syllables in "butterfly"?',opts:['1','2','3','4'],c:2,cat:'Phonics'},
+{t:'mc',q:'How many syllables in "elephant"?',opts:['1','2','3','4'],c:2,cat:'Phonics'},
+{t:'mc',q:'How many syllables in "happy"?',opts:['1','2','3','4'],c:1,cat:'Phonics'},
+{t:'mc',q:'How many syllables in "cat"?',opts:['1','2','3','4'],c:0,cat:'Phonics'},
+{t:'mc',q:'Which word has the "oi" sound?',opts:['boat','coin','coat','cool'],c:1,cat:'Phonics'},
+{t:'mc',q:'Which word has the "ou" sound as in "cloud"?',opts:['coat','couch','cool','corn'],c:1,cat:'Phonics'},
+{t:'mc',q:'Which word has the "ar" sound?',opts:['car','care','care','cat'],c:0,cat:'Phonics'},
+{t:'mc',q:'Which word has the "er" sound?',opts:['her','hen','hay','him'],c:0,cat:'Phonics'},
+{t:'mc',q:'Which word ends with a "k" sound?',opts:['back','bad','bag','ban'],c:0,cat:'Phonics'},
+{t:'mc',q:'Which word ends with a "ng" sound?',opts:['sink','ring','link','rink'],c:1,cat:'Phonics'},
+{t:'mc',q:'Which word has a double letter?',opts:['cat','dog','ball','run'],c:2,cat:'Phonics'},
+{t:'mc',q:'Which word has a "wh" at the start?',opts:['when','then','hen','ten'],c:0,cat:'Phonics'},
+{t:'mc',q:'Which word has the long "i" sound?',opts:['bit','bin','bike','big'],c:2,cat:'Phonics'},
+
+// --- GRAMMAR (40) ---
+{t:'mc',q:'Which word is a NOUN (thing or place)?',opts:['run','happy','castle','quickly'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is a NOUN?',opts:['blue','table','jump','slowly'],c:1,cat:'Grammar'},
+{t:'mc',q:'Which word is a NOUN?',opts:['sing','tiny','London','fast'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is a VERB (action word)?',opts:['dog','swim','red','loud'],c:1,cat:'Grammar'},
+{t:'mc',q:'Which word is a VERB?',opts:['pretty','flower','run','chair'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is a VERB?',opts:['big','ship','fast','eat'],c:3,cat:'Grammar'},
+{t:'mc',q:'Which word is an ADJECTIVE (describing word)?',opts:['run','boat','fluffy','sing'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is an ADJECTIVE?',opts:['house','walk','tall','apple'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is an ADJECTIVE?',opts:['swim','quickly','tiny','run'],c:2,cat:'Grammar'},
+{t:'mc',q:'What is the plural of CHILD?',opts:['childs','childes','children','childrens'],c:2,cat:'Grammar'},
+{t:'mc',q:'What is the plural of BOX?',opts:['boxs','boxes','boxen','box'],c:1,cat:'Grammar'},
+{t:'mc',q:'What is the plural of TOOTH?',opts:['tooths','teeths','toothes','teeth'],c:3,cat:'Grammar'},
+{t:'mc',q:'What is the plural of MOUSE?',opts:['mouses','mousies','mice','mices'],c:2,cat:'Grammar'},
+{t:'mc',q:'What is the plural of LEAF?',opts:['leafs','leaves','leafes','leeves'],c:1,cat:'Grammar'},
+{t:'mc',q:'What is the plural of FOOT?',opts:['foots','feets','feet','footies'],c:2,cat:'Grammar'},
+{t:'mc',q:'What is the plural of CAT?',opts:['cates','caties','cat','cats'],c:3,cat:'Grammar'},
+{t:'mc',q:'What is the plural of BABY?',opts:['babys','babyes','babies','babyes'],c:2,cat:'Grammar'},
+{t:'mc',q:'What is the plural of BUS?',opts:['bus','buss','buses','busies'],c:2,cat:'Grammar'},
+{t:'text',q:'What is the opposite of HOT?',c:['cold'],cat:'Grammar'},
+{t:'text',q:'What is the opposite of BIG?',c:['small','little','tiny'],cat:'Grammar'},
+{t:'text',q:'What is the opposite of DAY?',c:['night'],cat:'Grammar'},
+{t:'text',q:'What is the opposite of FAST?',c:['slow'],cat:'Grammar'},
+{t:'text',q:'What is the opposite of UP?',c:['down'],cat:'Grammar'},
+{t:'text',q:'What is the opposite of HAPPY?',c:['sad','unhappy'],cat:'Grammar'},
+{t:'text',q:'What is the opposite of HARD?',c:['soft','easy'],cat:'Grammar'},
+{t:'text',q:'What is the opposite of OPEN?',c:['closed','shut'],cat:'Grammar'},
+{t:'mc',q:'Which sentence uses the correct punctuation?',opts:['the dog barked.','The dog barked.','The dog barked','the Dog barked.'],c:1,cat:'Grammar'},
+{t:'mc',q:'What goes at the end of a question?',opts:['full stop .','question mark ?','exclamation mark !','comma ,'],c:1,cat:'Grammar'},
+{t:'mc',q:'What goes at the end of a sentence showing excitement?',opts:['full stop .','question mark ?','exclamation mark !','comma ,'],c:2,cat:'Grammar'},
+{t:'mc',q:'Every sentence must start with a...',opts:['small letter','capital letter','number','comma'],c:1,cat:'Grammar'},
+{t:'mc',q:'Which is a complete sentence?',opts:['The big red','ran very fast','The dog ran fast.','big and tall'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is a connective (joining word)?',opts:['cat','run','and','happy'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is a connective?',opts:['but','table','swim','tall'],c:0,cat:'Grammar'},
+{t:'mc',q:'Which word is a connective?',opts:['flower','because','fast','small'],c:1,cat:'Grammar'},
+{t:'mc',q:'Fill in the gap: "I ___ to the park." (go / goes)',opts:['goes','go','going','gone'],c:1,cat:'Grammar'},
+{t:'mc',q:'Fill in the gap: "She ___ to the shop." (go / goes)',opts:['go','goed','goes','going'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which word is a proper noun (name of a person or place)?',opts:['dog','London','fast','swim'],c:1,cat:'Grammar'},
+{t:'mc',q:'Which word is a pronoun?',opts:['dog','run','she','fast'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which pronoun replaces a boy\'s name?',opts:['she','her','he','they'],c:2,cat:'Grammar'},
+{t:'mc',q:'Which pronoun replaces a girl\'s name?',opts:['he','him','they','she'],c:3,cat:'Grammar'},
+
+// --- COMPREHENSION (30) ---
+{t:'mc',q:'Read: "Lily has a red ball. She kicks it into the goal." What colour is Lily\'s ball?',opts:['blue','green','red','yellow'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "Ben went to the shop. He bought milk and bread." What did Ben buy?',opts:['eggs and cheese','milk and bread','milk and butter','bread and eggs'],c:1,cat:'Comprehension'},
+{t:'text',q:'Read: "Sara has a cat called Fluffy. Fluffy is orange." What is the cat\'s name?',c:['fluffy'],cat:'Comprehension'},
+{t:'mc',q:'Read: "The sun is yellow and very bright. It makes us warm." What does the sun make us feel?',opts:['cold','wet','warm','sleepy'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "Tom has 5 books. He reads 2. How many are left?" What is the answer?',opts:['2','3','5','7'],c:1,cat:'Comprehension'},
+{t:'mc',q:'Read: "The frog jumped into the pond with a big splash." Where did the frog jump?',opts:['into a tree','onto a log','into the pond','onto a rock'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "Mia loves painting. Her favourite colour is purple." What is Mia\'s hobby?',opts:['singing','reading','dancing','painting'],c:3,cat:'Comprehension'},
+{t:'mc',q:'Read: "The dog barked loudly at the postman." Who did the dog bark at?',opts:['a cat','a child','the postman','a bird'],c:2,cat:'Comprehension'},
+{t:'text',q:'Read: "Jack climbed a very tall beanstalk." What did Jack climb?',c:['beanstalk','a beanstalk'],cat:'Comprehension'},
+{t:'mc',q:'Read: "The snow fell all night. In the morning everything was white." When did the snow fall?',opts:['in the morning','all night','at lunchtime','in the afternoon'],c:1,cat:'Comprehension'},
+{t:'mc',q:'Read: "Ella put on her red coat and blue hat before going outside." What colour was the hat?',opts:['red','green','yellow','blue'],c:3,cat:'Comprehension'},
+{t:'mc',q:'Read: "The baker made 12 loaves of bread." What did the baker make?',opts:['cakes','biscuits','loaves of bread','muffins'],c:2,cat:'Comprehension'},
+{t:'text',q:'Read: "Max the dog sat by the fire and went to sleep." What is the dog\'s name?',c:['max'],cat:'Comprehension'},
+{t:'mc',q:'Read: "The butterfly had orange and black wings." What colour were the wings?',opts:['blue and white','red and yellow','orange and black','green and purple'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "It was raining so Sam stayed inside and played a game." Why did Sam stay inside?',opts:['it was sunny','it was snowing','it was raining','it was windy'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "Amy wrote a letter to her granny." Who did Amy write to?',opts:['her mum','her friend','her teacher','her granny'],c:3,cat:'Comprehension'},
+{t:'text',q:'Read: "The train left at 9 o\'clock." What time did the train leave?',c:['9 oclock','9 o\'clock','nine o\'clock','9'],cat:'Comprehension'},
+{t:'mc',q:'Read: "The lemon tasted very sour. Jake pulled a funny face." How did the lemon taste?',opts:['sweet','sour','bitter','salty'],c:1,cat:'Comprehension'},
+{t:'mc',q:'Read: "There were 6 red apples and 4 green apples in the bowl." How many apples were there altogether?',opts:['6','4','10','8'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "The princess lived in a tall castle by the sea." Where was the castle?',opts:['in a forest','on a hill','by the sea','in the city'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "Dad made pasta for dinner. It was delicious!" What did dad make?',opts:['pizza','soup','pasta','sandwiches'],c:2,cat:'Comprehension'},
+{t:'text',q:'Read: "The baby elephant was called Ellie." What was the elephant called?',c:['ellie'],cat:'Comprehension'},
+{t:'mc',q:'Read: "She opened the present and found a teddy bear inside." What was inside the present?',opts:['a toy car','a teddy bear','a book','a ball'],c:1,cat:'Comprehension'},
+{t:'mc',q:'Read: "The class went on a trip to the zoo. They saw lions, elephants and penguins." How many types of animal are mentioned?',opts:['1','2','3','4'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "It was cold, so Mum put on the heating." Why did Mum put on the heating?',opts:['it was hot','it was cold','it was windy','it was raining'],c:1,cat:'Comprehension'},
+{t:'mc',q:'Read: "The spider had 8 legs and was black and brown." How many legs did the spider have?',opts:['6','4','8','10'],c:2,cat:'Comprehension'},
+{t:'text',q:'Read: "Gran baked a chocolate cake for Tom\'s birthday." What flavour was the cake?',c:['chocolate'],cat:'Comprehension'},
+{t:'mc',q:'Read: "The knight wore shiny armour and rode a white horse." What colour was the horse?',opts:['black','brown','white','grey'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "The market opens every Saturday morning." When does the market open?',opts:['every Sunday','every day','every Saturday','every Friday'],c:2,cat:'Comprehension'},
+{t:'mc',q:'Read: "The wind blew so hard that it knocked over the flowerpot." What did the wind knock over?',opts:['a fence','a tree','a bucket','the flowerpot'],c:3,cat:'Comprehension'},
+
+// --- ALPHABETICAL ORDER / DAYS / MONTHS (20) ---
+{t:'mc',q:'Which letter comes after M in the alphabet?',opts:['L','O','N','P'],c:2,cat:'Alphabet'},
+{t:'mc',q:'How many letters are in the alphabet?',opts:['24','25','26','28'],c:2,cat:'Alphabet'},
+{t:'mc',q:'Which letter comes before F?',opts:['G','E','D','H'],c:1,cat:'Alphabet'},
+{t:'mc',q:'Which letter comes after Z?',opts:['Y','A','There is no letter after Z','B'],c:2,cat:'Alphabet'},
+{t:'mc',q:'Which word would come FIRST in a dictionary?',opts:['mango','apple','zebra','tiger'],c:1,cat:'Alphabet'},
+{t:'mc',q:'Which word would come LAST in a dictionary?',opts:['ant','ball','zoo','cup'],c:2,cat:'Alphabet'},
+{t:'mc',q:'Which day comes after Tuesday?',opts:['Monday','Thursday','Wednesday','Friday'],c:2,cat:'Days & Months'},
+{t:'mc',q:'Which day comes after Friday?',opts:['Sunday','Monday','Saturday','Thursday'],c:2,cat:'Days & Months'},
+{t:'mc',q:'Which day comes before Monday?',opts:['Tuesday','Wednesday','Saturday','Sunday'],c:3,cat:'Days & Months'},
+{t:'mc',q:'How many days are in a week?',opts:['5','6','7','8'],c:2,cat:'Days & Months'},
+{t:'mc',q:'Which month comes after January?',opts:['March','February','December','April'],c:1,cat:'Days & Months'},
+{t:'mc',q:'Which month comes after March?',opts:['February','May','April','June'],c:2,cat:'Days & Months'},
+{t:'mc',q:'Which month is the 12th month of the year?',opts:['October','November','December','January'],c:2,cat:'Days & Months'},
+{t:'mc',q:'How many months are in a year?',opts:['10','11','12','13'],c:2,cat:'Days & Months'},
+{t:'mc',q:'Which month do we celebrate Christmas?',opts:['November','October','January','December'],c:3,cat:'Days & Months'},
+{t:'mc',q:'Which season comes after winter?',opts:['autumn','summer','spring','winter'],c:2,cat:'Days & Months'},
+{t:'mc',q:'Which season comes after summer?',opts:['spring','winter','summer','autumn'],c:3,cat:'Days & Months'},
+{t:'mc',q:'Which is the first month of the year?',opts:['February','March','December','January'],c:3,cat:'Days & Months'},
+{t:'mc',q:'How many days in most months?',opts:['28','29','30 or 31','32'],c:2,cat:'Days & Months'},
+{t:'mc',q:'Which month has only 28 days (most years)?',opts:['January','March','February','April'],c:2,cat:'Days & Months'},
+
+// --- MISSING LETTERS / WORDS (20) ---
+{t:'text',q:'Complete the word: el_ph_nt',c:['elephant'],cat:'Missing Letters'},
+{t:'text',q:'Complete the word: b_tt_rfly',c:['butterfly'],cat:'Missing Letters'},
+{t:'text',q:'Complete the word: r_inb_w',c:['rainbow'],cat:'Missing Letters'},
+{t:'text',q:'Complete the word: d_lph_n',c:['dolphin'],cat:'Missing Letters'},
+{t:'text',q:'Complete the word: p_ng__n',c:['penguin'],cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "She ___ to school every day." (walk)',opts:['walk','walked','walking','walks'],c:3,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "Yesterday, I ___ my dinner." (eat)',opts:['eat','eating','ate','eated'],c:2,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "They ___ playing in the garden." (be)',opts:['is','was','are','were'],c:3,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "The book ___ on the table." (be)',opts:['are','were','is','am'],c:2,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "I ___ seven years old." (be)',opts:['are','is','am','be'],c:2,cat:'Missing Letters'},
+{t:'text',q:'Complete the word: _nbrella (starts with U)',c:['umbrella'],cat:'Missing Letters'},
+{t:'text',q:'Complete the word: sn_wfl_ke',c:['snowflake'],cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "He is ___ than his brother." (tall)',opts:['tall','more tall','taller','tallest'],c:2,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "This is the ___ day of the week." (use correct word)',opts:['more','less','first','firstest'],c:2,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "I have ___ apple." (a/an)',opts:['a','an','the','some'],c:1,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "She has ___ orange." (a/an)',opts:['a','an','the','some'],c:1,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "We saw ___ elephant at the zoo." (a/an)',opts:['a','an','one','some'],c:1,cat:'Missing Letters'},
+{t:'text',q:'Complete the word: fr__ndship',c:['friendship'],cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "The ___ was very hot today." (sun/son)',opts:['son','sun','sone','sunn'],c:1,cat:'Missing Letters'},
+{t:'mc',q:'Fill in the gap: "I can ___ very fast." (run)',opts:['ran','runs','running','run'],c:3,cat:'Missing Letters'},
+];
+
+const MATHS_DATA = [
+// --- ADDITION (30) ---
+{t:'mc',q:'5 + 3 = ?',opts:['7','8','9','6'],c:1,cat:'Addition'},
+{t:'mc',q:'9 + 6 = ?',opts:['14','15','16','13'],c:1,cat:'Addition'},
+{t:'mc',q:'12 + 8 = ?',opts:['18','19','20','21'],c:2,cat:'Addition'},
+{t:'text',q:'14 + 7 = ?',c:['21'],cat:'Addition'},
+{t:'mc',q:'24 + 13 = ?',opts:['36','37','38','34'],c:1,cat:'Addition'},
+{t:'text',q:'36 + 25 = ?',c:['61'],cat:'Addition'},
+{t:'mc',q:'45 + 30 = ?',opts:['74','75','76','70'],c:1,cat:'Addition'},
+{t:'text',q:'57 + 24 = ?',c:['81'],cat:'Addition'},
+{t:'mc',q:'63 + 18 = ?',opts:['80','81','82','79'],c:1,cat:'Addition'},
+{t:'text',q:'28 + 35 = ?',c:['63'],cat:'Addition'},
+{t:'mc',q:'100 + 50 = ?',opts:['140','150','160','130'],c:1,cat:'Addition'},
+{t:'text',q:'75 + 25 = ?',c:['100'],cat:'Addition'},
+{t:'mc',q:'44 + 44 = ?',opts:['86','87','88','89'],c:2,cat:'Addition'},
+{t:'text',q:'19 + 19 = ?',c:['38'],cat:'Addition'},
+{t:'mc',q:'7 + 8 = ?',opts:['14','15','13','16'],c:1,cat:'Addition'},
+{t:'mc',q:'6 + 9 = ?',opts:['13','14','15','16'],c:2,cat:'Addition'},
+{t:'text',q:'50 + 50 = ?',c:['100'],cat:'Addition'},
+{t:'mc',q:'33 + 33 = ?',opts:['64','65','66','67'],c:2,cat:'Addition'},
+{t:'text',q:'48 + 12 = ?',c:['60'],cat:'Addition'},
+{t:'mc',q:'200 + 300 = ?',opts:['400','500','600','700'],c:1,cat:'Addition'},
+{t:'text',q:'17 + 13 = ?',c:['30'],cat:'Addition'},
+{t:'mc',q:'25 + 75 = ?',opts:['90','95','100','105'],c:2,cat:'Addition'},
+{t:'text',q:'39 + 11 = ?',c:['50'],cat:'Addition'},
+{t:'mc',q:'66 + 14 = ?',opts:['78','79','80','81'],c:2,cat:'Addition'},
+{t:'text',q:'42 + 38 = ?',c:['80'],cat:'Addition'},
+{t:'mc',q:'55 + 45 = ?',opts:['98','99','100','101'],c:2,cat:'Addition'},
+{t:'text',q:'26 + 14 = ?',c:['40'],cat:'Addition'},
+{t:'mc',q:'87 + 13 = ?',opts:['98','99','100','101'],c:2,cat:'Addition'},
+{t:'text',q:'64 + 16 = ?',c:['80'],cat:'Addition'},
+{t:'mc',q:'70 + 30 = ?',opts:['90','95','100','105'],c:2,cat:'Addition'},
+
+// --- SUBTRACTION (25) ---
+{t:'mc',q:'10 − 4 = ?',opts:['5','6','7','4'],c:1,cat:'Subtraction'},
+{t:'mc',q:'15 − 7 = ?',opts:['7','8','9','6'],c:1,cat:'Subtraction'},
+{t:'text',q:'50 − 17 = ?',c:['33'],cat:'Subtraction'},
+{t:'mc',q:'20 − 8 = ?',opts:['10','11','12','13'],c:2,cat:'Subtraction'},
+{t:'text',q:'100 − 35 = ?',c:['65'],cat:'Subtraction'},
+{t:'mc',q:'30 − 12 = ?',opts:['16','17','18','19'],c:2,cat:'Subtraction'},
+{t:'text',q:'45 − 20 = ?',c:['25'],cat:'Subtraction'},
+{t:'mc',q:'60 − 25 = ?',opts:['33','34','35','36'],c:2,cat:'Subtraction'},
+{t:'text',q:'80 − 45 = ?',c:['35'],cat:'Subtraction'},
+{t:'mc',q:'100 − 60 = ?',opts:['30','40','50','60'],c:1,cat:'Subtraction'},
+{t:'text',q:'75 − 25 = ?',c:['50'],cat:'Subtraction'},
+{t:'mc',q:'18 − 9 = ?',opts:['7','8','9','10'],c:2,cat:'Subtraction'},
+{t:'text',q:'55 − 28 = ?',c:['27'],cat:'Subtraction'},
+{t:'mc',q:'40 − 15 = ?',opts:['23','24','25','26'],c:2,cat:'Subtraction'},
+{t:'text',q:'90 − 35 = ?',c:['55'],cat:'Subtraction'},
+{t:'mc',q:'13 − 6 = ?',opts:['5','6','7','8'],c:2,cat:'Subtraction'},
+{t:'text',q:'64 − 24 = ?',c:['40'],cat:'Subtraction'},
+{t:'mc',q:'25 − 10 = ?',opts:['13','14','15','16'],c:2,cat:'Subtraction'},
+{t:'text',q:'100 − 1 = ?',c:['99'],cat:'Subtraction'},
+{t:'mc',q:'50 − 50 = ?',opts:['1','0','5','10'],c:1,cat:'Subtraction'},
+{t:'text',q:'77 − 22 = ?',c:['55'],cat:'Subtraction'},
+{t:'mc',q:'38 − 19 = ?',opts:['17','18','19','20'],c:2,cat:'Subtraction'},
+{t:'text',q:'66 − 33 = ?',c:['33'],cat:'Subtraction'},
+{t:'mc',q:'44 − 22 = ?',opts:['20','21','22','23'],c:2,cat:'Subtraction'},
+{t:'text',q:'88 − 44 = ?',c:['44'],cat:'Subtraction'},
+
+// --- MULTIPLICATION (25) ---
+{t:'mc',q:'2 × 5 = ?',opts:['8','10','12','7'],c:1,cat:'Multiplication'},
+{t:'mc',q:'3 × 4 = ?',opts:['10','11','12','14'],c:2,cat:'Multiplication'},
+{t:'text',q:'5 × 6 = ?',c:['30'],cat:'Multiplication'},
+{t:'mc',q:'6 × 7 = ?',opts:['40','42','48','36'],c:1,cat:'Multiplication'},
+{t:'text',q:'10 × 8 = ?',c:['80'],cat:'Multiplication'},
+{t:'mc',q:'2 × 9 = ?',opts:['16','17','18','19'],c:2,cat:'Multiplication'},
+{t:'text',q:'5 × 5 = ?',c:['25'],cat:'Multiplication'},
+{t:'mc',q:'3 × 3 = ?',opts:['6','7','8','9'],c:3,cat:'Multiplication'},
+{t:'text',q:'10 × 10 = ?',c:['100'],cat:'Multiplication'},
+{t:'mc',q:'4 × 6 = ?',opts:['20','22','24','26'],c:2,cat:'Multiplication'},
+{t:'text',q:'2 × 7 = ?',c:['14'],cat:'Multiplication'},
+{t:'mc',q:'5 × 8 = ?',opts:['35','38','40','45'],c:2,cat:'Multiplication'},
+{t:'text',q:'3 × 6 = ?',c:['18'],cat:'Multiplication'},
+{t:'mc',q:'10 × 5 = ?',opts:['45','50','55','60'],c:1,cat:'Multiplication'},
+{t:'text',q:'4 × 4 = ?',c:['16'],cat:'Multiplication'},
+{t:'mc',q:'2 × 2 = ?',opts:['2','3','4','5'],c:2,cat:'Multiplication'},
+{t:'text',q:'3 × 7 = ?',c:['21'],cat:'Multiplication'},
+{t:'mc',q:'5 × 9 = ?',opts:['40','43','45','47'],c:2,cat:'Multiplication'},
+{t:'text',q:'2 × 8 = ?',c:['16'],cat:'Multiplication'},
+{t:'mc',q:'10 × 7 = ?',opts:['60','65','70','75'],c:2,cat:'Multiplication'},
+{t:'text',q:'4 × 5 = ?',c:['20'],cat:'Multiplication'},
+{t:'mc',q:'3 × 8 = ?',opts:['21','22','24','26'],c:2,cat:'Multiplication'},
+{t:'text',q:'6 × 6 = ?',c:['36'],cat:'Multiplication'},
+{t:'mc',q:'2 × 10 = ?',opts:['12','18','20','22'],c:2,cat:'Multiplication'},
+{t:'text',q:'5 × 7 = ?',c:['35'],cat:'Multiplication'},
+
+// --- DIVISION (20) ---
+{t:'mc',q:'12 ÷ 3 = ?',opts:['3','4','5','6'],c:1,cat:'Division'},
+{t:'text',q:'36 ÷ 4 = ?',c:['9'],cat:'Division'},
+{t:'mc',q:'20 ÷ 5 = ?',opts:['3','4','5','6'],c:1,cat:'Division'},
+{t:'text',q:'18 ÷ 2 = ?',c:['9'],cat:'Division'},
+{t:'mc',q:'30 ÷ 10 = ?',opts:['2','3','4','5'],c:1,cat:'Division'},
+{t:'text',q:'24 ÷ 4 = ?',c:['6'],cat:'Division'},
+{t:'mc',q:'15 ÷ 3 = ?',opts:['3','4','5','6'],c:2,cat:'Division'},
+{t:'text',q:'40 ÷ 5 = ?',c:['8'],cat:'Division'},
+{t:'mc',q:'16 ÷ 2 = ?',opts:['6','7','8','9'],c:2,cat:'Division'},
+{t:'text',q:'50 ÷ 10 = ?',c:['5'],cat:'Division'},
+{t:'mc',q:'24 ÷ 3 = ?',opts:['6','7','8','9'],c:2,cat:'Division'},
+{t:'text',q:'45 ÷ 5 = ?',c:['9'],cat:'Division'},
+{t:'mc',q:'100 ÷ 10 = ?',opts:['5','8','10','12'],c:2,cat:'Division'},
+{t:'text',q:'28 ÷ 4 = ?',c:['7'],cat:'Division'},
+{t:'mc',q:'14 ÷ 2 = ?',opts:['5','6','7','8'],c:2,cat:'Division'},
+{t:'text',q:'30 ÷ 5 = ?',c:['6'],cat:'Division'},
+{t:'mc',q:'9 ÷ 3 = ?',opts:['2','3','4','5'],c:1,cat:'Division'},
+{t:'text',q:'20 ÷ 2 = ?',c:['10'],cat:'Division'},
+{t:'mc',q:'35 ÷ 5 = ?',opts:['5','6','7','8'],c:2,cat:'Division'},
+{t:'text',q:'80 ÷ 10 = ?',c:['8'],cat:'Division'},
+
+// --- PLACE VALUE (15) ---
+{t:'mc',q:'In 375, what is the value of the digit 7?',opts:['7','70','700','17'],c:1,cat:'Place Value'},
+{t:'mc',q:'What is the hundreds digit in 482?',opts:['2','8','4','48'],c:2,cat:'Place Value'},
+{t:'mc',q:'What is the tens digit in 637?',opts:['6','3','7','37'],c:1,cat:'Place Value'},
+{t:'mc',q:'What is the units digit in 259?',opts:['2','5','9','25'],c:2,cat:'Place Value'},
+{t:'mc',q:'What does the 5 mean in 503?',opts:['5 ones','5 tens','5 hundreds','50 tens'],c:2,cat:'Place Value'},
+{t:'mc',q:'Which number has a 4 in the tens place?',opts:['400','40','4','14'],c:1,cat:'Place Value'},
+{t:'text',q:'Write the number: 3 hundreds, 2 tens, 5 ones',c:['325'],cat:'Place Value'},
+{t:'mc',q:'What is 200 + 40 + 7?',opts:['247','274','472','742'],c:0,cat:'Place Value'},
+{t:'mc',q:'What number is 10 more than 45?',opts:['44','46','54','55'],c:3,cat:'Place Value'},
+{t:'text',q:'What number is 10 less than 80?',c:['70'],cat:'Place Value'},
+{t:'mc',q:'What number is 100 more than 250?',opts:['150','260','350','450'],c:2,cat:'Place Value'},
+{t:'text',q:'What number is 100 less than 500?',c:['400'],cat:'Place Value'},
+{t:'mc',q:'Which is the largest 3-digit number you can make with 3, 1, 5?',opts:['135','153','315','531'],c:3,cat:'Place Value'},
+{t:'mc',q:'What is 400 + 60 + 3?',opts:['463','436','346','643'],c:0,cat:'Place Value'},
+{t:'mc',q:'Round 38 to the nearest 10:',opts:['30','35','40','50'],c:2,cat:'Place Value'},
+
+// --- FRACTIONS (15) ---
+{t:'text',q:'½ of 20 = ?',c:['10'],cat:'Fractions'},
+{t:'mc',q:'¼ of 12 = ?',opts:['2','3','4','6'],c:1,cat:'Fractions'},
+{t:'mc',q:'3 out of 6 parts are coloured. What fraction is shaded?',opts:['¼','½','¾','⅓'],c:1,cat:'Fractions'},
+{t:'text',q:'½ of 16 = ?',c:['8'],cat:'Fractions'},
+{t:'mc',q:'¼ of 20 = ?',opts:['4','5','6','8'],c:1,cat:'Fractions'},
+{t:'text',q:'½ of 50 = ?',c:['25'],cat:'Fractions'},
+{t:'mc',q:'¼ of 8 = ?',opts:['1','2','3','4'],c:1,cat:'Fractions'},
+{t:'mc',q:'Which fraction is bigger: ½ or ¼?',opts:['¼','½','they are equal','cannot tell'],c:1,cat:'Fractions'},
+{t:'mc',q:'How many quarters make a whole?',opts:['2','3','4','5'],c:2,cat:'Fractions'},
+{t:'mc',q:'How many halves make a whole?',opts:['1','2','3','4'],c:1,cat:'Fractions'},
+{t:'text',q:'¼ of 16 = ?',c:['4'],cat:'Fractions'},
+{t:'mc',q:'¾ of 12 = ?',opts:['3','6','9','12'],c:2,cat:'Fractions'},
+{t:'mc',q:'½ of 100 = ?',opts:['25','40','50','75'],c:2,cat:'Fractions'},
+{t:'mc',q:'2 out of 8 parts are coloured. What fraction?',opts:['½','¼','⅓','¾'],c:1,cat:'Fractions'},
+{t:'text',q:'½ of 30 = ?',c:['15'],cat:'Fractions'},
+
+// --- SHAPES (15) ---
+{t:'mc',q:'How many sides does a hexagon have?',opts:['4','5','6','8'],c:2,cat:'Shapes'},
+{t:'mc',q:'How many sides does a triangle have?',opts:['2','3','4','5'],c:1,cat:'Shapes'},
+{t:'mc',q:'A shape with 8 sides is called a...',opts:['hexagon','heptagon','octagon','pentagon'],c:2,cat:'Shapes'},
+{t:'mc',q:'How many faces does a cube have?',opts:['4','5','6','8'],c:2,cat:'Shapes'},
+{t:'mc',q:'How many sides does a square have?',opts:['3','4','5','6'],c:1,cat:'Shapes'},
+{t:'mc',q:'How many corners does a rectangle have?',opts:['2','3','4','5'],c:2,cat:'Shapes'},
+{t:'mc',q:'What do we call a 3D shape that is round like a ball?',opts:['circle','cylinder','sphere','cube'],c:2,cat:'Shapes'},
+{t:'mc',q:'Which shape has all 4 sides the same length?',opts:['rectangle','triangle','square','pentagon'],c:2,cat:'Shapes'},
+{t:'mc',q:'How many faces does a cylinder have?',opts:['1','2','3','4'],c:2,cat:'Shapes'},
+{t:'mc',q:'A pentagon has how many sides?',opts:['4','5','6','7'],c:1,cat:'Shapes'},
+{t:'mc',q:'Which shape has no corners?',opts:['square','triangle','circle','rectangle'],c:2,cat:'Shapes'},
+{t:'mc',q:'How many edges does a cube have?',opts:['8','10','12','14'],c:2,cat:'Shapes'},
+{t:'mc',q:'What is the name of a 3D shape that looks like a can?',opts:['sphere','cone','cube','cylinder'],c:3,cat:'Shapes'},
+{t:'mc',q:'A shape with 4 equal sides and 4 right angles is a...',opts:['rhombus','rectangle','square','parallelogram'],c:2,cat:'Shapes'},
+{t:'mc',q:'How many vertices (corners) does a triangle have?',opts:['1','2','3','4'],c:2,cat:'Shapes'},
+
+// --- NUMBER PATTERNS / SEQUENCES (15) ---
+{t:'text',q:'What comes next? 5, 10, 15, 20, __',c:['25'],cat:'Number Patterns'},
+{t:'text',q:'What comes next? 2, 4, 6, 8, __',c:['10'],cat:'Number Patterns'},
+{t:'text',q:'What comes next? 100, 90, 80, 70, __',c:['60'],cat:'Number Patterns'},
+{t:'text',q:'What comes next? 3, 6, 9, 12, __',c:['15'],cat:'Number Patterns'},
+{t:'text',q:'What comes next? 10, 20, 30, 40, __',c:['50'],cat:'Number Patterns'},
+{t:'mc',q:'What is the missing number? 5, __, 15, 20',opts:['8','9','10','11'],c:2,cat:'Number Patterns'},
+{t:'mc',q:'What is the missing number? 2, 4, __, 8',opts:['5','6','7','8'],c:1,cat:'Number Patterns'},
+{t:'text',q:'What comes next? 1, 2, 4, 8, __',c:['16'],cat:'Number Patterns'},
+{t:'mc',q:'Which number comes next? 50, 45, 40, 35, __',opts:['28','29','30','31'],c:2,cat:'Number Patterns'},
+{t:'text',q:'What comes next? 0, 5, 10, 15, __',c:['20'],cat:'Number Patterns'},
+{t:'mc',q:'What is the rule for: 2, 4, 6, 8?',opts:['add 1','add 2','add 3','add 4'],c:1,cat:'Number Patterns'},
+{t:'mc',q:'What is the rule for: 10, 20, 30, 40?',opts:['add 5','add 10','add 15','add 20'],c:1,cat:'Number Patterns'},
+{t:'text',q:'What comes next? 25, 30, 35, 40, __',c:['45'],cat:'Number Patterns'},
+{t:'mc',q:'What is the missing number? 10, 20, __, 40, 50',opts:['25','28','30','35'],c:2,cat:'Number Patterns'},
+{t:'text',q:'What comes next? 1, 3, 5, 7, __',c:['9'],cat:'Number Patterns'},
+
+// --- MONEY (15) ---
+{t:'mc',q:'You have £1.00 and spend 35p. Change?',opts:['55p','65p','75p','60p'],c:1,cat:'Money'},
+{t:'text',q:'A bar costs 45p. You pay 50p. Change?',c:['5p','5'],cat:'Money'},
+{t:'mc',q:'2 apples cost 10p each. Total cost?',opts:['10p','15p','20p','25p'],c:2,cat:'Money'},
+{t:'mc',q:'A toy costs 75p. You pay £1. Change?',opts:['15p','20p','25p','30p'],c:2,cat:'Money'},
+{t:'text',q:'3 sweets cost 5p each. Total cost?',c:['15p','15'],cat:'Money'},
+{t:'mc',q:'Which coins make 20p? (choose best)',opts:['1p+1p','10p+10p','5p+5p','2p+2p'],c:1,cat:'Money'},
+{t:'mc',q:'You have 2 × 50p coins. Total?',opts:['50p','75p','£1','£1.50'],c:2,cat:'Money'},
+{t:'text',q:'You spend 30p and 20p. Total spent?',c:['50p','50'],cat:'Money'},
+{t:'mc',q:'A drink costs £1.20. You pay £2. Change?',opts:['60p','70p','80p','90p'],c:2,cat:'Money'},
+{t:'mc',q:'How many 10p coins make £1?',opts:['5','8','10','12'],c:2,cat:'Money'},
+{t:'text',q:'How many 5p coins make 25p?',c:['5'],cat:'Money'},
+{t:'mc',q:'A book costs £2.50. You pay £5. Change?',opts:['£2','£2.50','£3','£3.50'],c:1,cat:'Money'},
+{t:'mc',q:'How many 2p coins make 10p?',opts:['3','4','5','6'],c:2,cat:'Money'},
+{t:'text',q:'You have 50p + 20p + 10p. Total?',c:['80p','80'],cat:'Money'},
+{t:'mc',q:'A pencil costs 15p, a rubber costs 10p. Total?',opts:['20p','25p','30p','35p'],c:1,cat:'Money'},
+
+// --- WORD PROBLEMS (20) ---
+{t:'text',q:'8 apples per bag, 3 bags. Total apples?',c:['24'],cat:'Word Problems'},
+{t:'text',q:'Zara has 12 sweets shared between 4 friends. How many each?',c:['3'],cat:'Word Problems'},
+{t:'text',q:'A bus has 30 seats. 17 people get on. Empty seats?',c:['13'],cat:'Word Problems'},
+{t:'text',q:'A film starts at 3 and lasts 1 hour. What time does it end? (just the number)',c:['4'],cat:'Word Problems'},
+{t:'mc',q:'There are 5 red birds and 7 blue birds. How many birds altogether?',opts:['10','11','12','13'],c:2,cat:'Word Problems'},
+{t:'text',q:'Mum buys 6 eggs. She uses 2 for breakfast. How many left?',c:['4'],cat:'Word Problems'},
+{t:'mc',q:'Tom reads 4 pages a day. How many pages in 5 days?',opts:['18','19','20','21'],c:2,cat:'Word Problems'},
+{t:'text',q:'A jar has 20 biscuits. 8 are eaten. How many left?',c:['12'],cat:'Word Problems'},
+{t:'mc',q:'A box holds 10 chocolates. How many in 4 boxes?',opts:['30','35','40','45'],c:2,cat:'Word Problems'},
+{t:'text',q:'Sam has £3 and gets £2 more. How much now?',c:['5','£5'],cat:'Word Problems'},
+{t:'mc',q:'There are 3 classes of 25 children. Total children?',opts:['65','70','75','80'],c:2,cat:'Word Problems'},
+{t:'text',q:'A bag has 15 marbles. 5 are lost. How many left?',c:['10'],cat:'Word Problems'},
+{t:'mc',q:'Lily plants 4 rows of 6 flowers. Total flowers?',opts:['20','22','24','26'],c:2,cat:'Word Problems'},
+{t:'text',q:'Dad has 50p and spends 30p. How much left?',c:['20p','20'],cat:'Word Problems'},
+{t:'mc',q:'There are 10 boys and 12 girls. How many children altogether?',opts:['20','21','22','23'],c:2,cat:'Word Problems'},
+{t:'text',q:'Each child gets 2 stickers. There are 7 children. Total stickers?',c:['14'],cat:'Word Problems'},
+{t:'mc',q:'A recipe needs 3 eggs. Gran makes 4 batches. Eggs needed?',opts:['10','11','12','13'],c:2,cat:'Word Problems'},
+{t:'text',q:'A shelf holds 8 books. There are 3 shelves. Total books?',c:['24'],cat:'Word Problems'},
+{t:'mc',q:'Jo has 20 stickers and gives away half. How many left?',opts:['5','8','10','12'],c:2,cat:'Word Problems'},
+{t:'text',q:'There are 9 tables with 4 chairs each. Total chairs?',c:['36'],cat:'Word Problems'},
+
+// --- MEASUREMENT / TIME / DATA (20) ---
+{t:'mc',q:'How many cm in 1 metre?',opts:['10','50','100','1000'],c:2,cat:'Measurement'},
+{t:'mc',q:'How many days in a week?',opts:['5','6','7','8'],c:2,cat:'Measurement'},
+{t:'text',q:'How many months in a year?',c:['12'],cat:'Measurement'},
+{t:'mc',q:'How many days in most months?',opts:['28','30 or 31','29','32'],c:1,cat:'Measurement'},
+{t:'mc',q:'How many kg in 1 kg? (obviously 1, but: 500g is how much of a kg?)',opts:['¼','½','¾','⅔'],c:1,cat:'Measurement'},
+{t:'mc',q:'A banana is 20cm long. A pencil is 15cm. Which is longer?',opts:['pencil','banana','same','cannot tell'],c:1,cat:'Measurement'},
+{t:'mc',q:'Which unit would you use to measure how heavy a bag is?',opts:['cm','litres','kg','km'],c:2,cat:'Measurement'},
+{t:'mc',q:'Which unit would you use to measure water in a jug?',opts:['kg','litres','metres','km'],c:1,cat:'Measurement'},
+{t:'mc',q:'How many millilitres in 1 litre?',opts:['10','100','500','1000'],c:3,cat:'Measurement'},
+{t:'mc',q:'Which is longer: 1 metre or 50cm?',opts:['50cm','1 metre','they are equal','cannot tell'],c:1,cat:'Measurement'},
+{t:'mc',q:'A journey takes 2 hours. It starts at 10. When does it end?',opts:['11','12','1','2'],c:1,cat:'Measurement'},
+{t:'mc',q:'If a plant is 10cm and grows 5cm, how tall is it now?',opts:['14cm','15cm','16cm','17cm'],c:1,cat:'Measurement'},
+{t:'mc',q:'Which is heavier: 1kg or 500g?',opts:['500g','1kg','same','cannot tell'],c:1,cat:'Measurement'},
+{t:'mc',q:'A table is 1 metre wide. How many cm is that?',opts:['10','50','100','1000'],c:2,cat:'Measurement'},
+{t:'text',q:'How many seconds in 1 minute?',c:['60'],cat:'Measurement'},
+{t:'mc',q:'A bag has 5 red balls and 3 blue balls. What colour are most balls?',opts:['blue','red','same','cannot tell'],c:1,cat:'Measurement'},
+{t:'mc',q:'A tally chart shows 5 children like apples and 3 like bananas. How many children altogether?',opts:['5','3','8','10'],c:2,cat:'Measurement'},
+{t:'mc',q:'Which is longest: 30cm, 1m, 55cm?',opts:['30cm','55cm','1m','same'],c:2,cat:'Measurement'},
+{t:'text',q:'How many weeks in a year?',c:['52'],cat:'Measurement'},
+{t:'mc',q:'If it is Monday today, what day was it yesterday?',opts:['Tuesday','Sunday','Saturday','Wednesday'],c:1,cat:'Measurement'},
+
+// --- ODD/EVEN, ORDERING, NUMBER BONDS, DOUBLING, ROUNDING (20) ---
+{t:'mc',q:'Is 47 odd or even?',opts:['even','odd'],c:1,cat:'Number Knowledge'},
+{t:'mc',q:'Is 84 odd or even?',opts:['even','odd'],c:0,cat:'Number Knowledge'},
+{t:'mc',q:'Is 100 odd or even?',opts:['even','odd'],c:0,cat:'Number Knowledge'},
+{t:'mc',q:'Is 33 odd or even?',opts:['even','odd'],c:1,cat:'Number Knowledge'},
+{t:'mc',q:'Which is the smallest? 304, 43, 134, 430',opts:['304','43','134','430'],c:1,cat:'Number Knowledge'},
+{t:'mc',q:'Which is the largest? 56, 65, 59, 62',opts:['56','65','59','62'],c:1,cat:'Number Knowledge'},
+{t:'mc',q:'Which sign? 54 __ 45',opts:['< less than','> greater than','= equals'],c:1,cat:'Number Knowledge'},
+{t:'mc',q:'Which sign? 23 __ 32',opts:['< less than','> greater than','= equals'],c:0,cat:'Number Knowledge'},
+{t:'text',q:'What number added to 7 makes 10?',c:['3'],cat:'Number Knowledge'},
+{t:'text',q:'What number added to 45 makes 100?',c:['55'],cat:'Number Knowledge'},
+{t:'text',q:'What number added to 63 makes 100?',c:['37'],cat:'Number Knowledge'},
+{t:'mc',q:'Double 16 = ?',opts:['28','30','32','34'],c:2,cat:'Number Knowledge'},
+{t:'mc',q:'Double 25 = ?',opts:['40','45','50','55'],c:2,cat:'Number Knowledge'},
+{t:'mc',q:'Half of 18 = ?',opts:['7','8','9','10'],c:2,cat:'Number Knowledge'},
+{t:'mc',q:'Half of 30 = ?',opts:['10','12','15','18'],c:2,cat:'Number Knowledge'},
+{t:'mc',q:'Round 38 to the nearest 10',opts:['30','35','40','50'],c:2,cat:'Number Knowledge'},
+{t:'mc',q:'Round 72 to the nearest 10',opts:['60','65','70','80'],c:2,cat:'Number Knowledge'},
+{t:'mc',q:'Round 25 to the nearest 10',opts:['20','25','30','35'],c:2,cat:'Number Knowledge'},
+{t:'text',q:'What is double 14?',c:['28'],cat:'Number Knowledge'},
+{t:'text',q:'What is half of 40?',c:['20'],cat:'Number Knowledge'},
+];
+
+const CLOCK_DATA = [
+// Face clocks 0-29
+{t:'clock',h:3,m:0,q:'What time is shown?',opts:["2 o'clock","3 o'clock","9 o'clock","12 o'clock"],c:1,cat:"O'Clock"},
+{t:'clock',h:8,m:0,q:'What time is shown?',opts:["7 o'clock","8 o'clock","4 o'clock","5 o'clock"],c:1,cat:"O'Clock"},
+{t:'clock',h:1,m:0,q:'What time is shown?',opts:["10 o'clock","11 o'clock","1 o'clock","2 o'clock"],c:2,cat:"O'Clock"},
+{t:'clock',h:5,m:0,q:'What time is shown?',opts:["4 o'clock","5 o'clock","6 o'clock","7 o'clock"],c:1,cat:"O'Clock"},
+{t:'clock',h:11,m:0,q:'What time is shown?',opts:["10 o'clock","11 o'clock","12 o'clock","9 o'clock"],c:1,cat:"O'Clock"},
+{t:'clock',h:7,m:0,q:'What time is shown?',opts:["6 o'clock","7 o'clock","8 o'clock","9 o'clock"],c:1,cat:"O'Clock"},
+{t:'clock',h:2,m:0,q:'What time is shown?',opts:["1 o'clock","2 o'clock","3 o'clock","4 o'clock"],c:1,cat:"O'Clock"},
+{t:'clock',h:10,m:0,q:'What time is shown?',opts:["9 o'clock","10 o'clock","11 o'clock","12 o'clock"],c:1,cat:"O'Clock"},
+{t:'clock',h:6,m:30,q:'What time is shown?',opts:["half past 5","half past 6","6 o'clock","quarter past 6"],c:1,cat:"Half Past"},
+{t:'clock',h:2,m:30,q:'What time is shown?',opts:["half past 1","half past 2","2 o'clock","quarter past 2"],c:1,cat:"Half Past"},
+{t:'clock',h:10,m:30,q:'What time is shown?',opts:["half past 9","half past 10","10 o'clock","quarter to 10"],c:1,cat:"Half Past"},
+{t:'clock',h:4,m:30,q:'What time is shown?',opts:["half past 3","half past 4","4 o'clock","quarter past 4"],c:1,cat:"Half Past"},
+{t:'clock',h:12,m:30,q:'What time is shown?',opts:["half past 11","half past 12","12 o'clock","quarter to 12"],c:1,cat:"Half Past"},
+{t:'clock',h:7,m:30,q:'What time is shown?',opts:["half past 6","half past 7","7 o'clock","quarter past 7"],c:1,cat:"Half Past"},
+{t:'clock',h:9,m:15,q:'What time is shown?',opts:["quarter to 9","quarter past 9","half past 9","9 o'clock"],c:1,cat:"Quarter Past"},
+{t:'clock',h:4,m:15,q:'What time is shown?',opts:["quarter past 11","quarter past 4","quarter to 4","half past 4"],c:1,cat:"Quarter Past"},
+{t:'clock',h:1,m:15,q:'What time is shown?',opts:["quarter to 1","half past 1","quarter past 1","1 o'clock"],c:2,cat:"Quarter Past"},
+{t:'clock',h:6,m:15,q:'What time is shown?',opts:["quarter past 5","quarter past 6","half past 6","6 o'clock"],c:1,cat:"Quarter Past"},
+{t:'clock',h:11,m:15,q:'What time is shown?',opts:["quarter to 11","quarter past 11","half past 11","11 o'clock"],c:1,cat:"Quarter Past"},
+{t:'clock',h:3,m:45,q:'What time is shown?',opts:["quarter past 4","quarter to 4","half past 3","quarter past 3"],c:1,cat:"Quarter To"},
+{t:'clock',h:6,m:45,q:'What time is shown?',opts:["quarter past 7","quarter to 7","half past 6","quarter to 8"],c:1,cat:"Quarter To"},
+{t:'clock',h:10,m:45,q:'What time is shown?',opts:["quarter past 11","quarter to 11","half past 10","quarter to 10"],c:1,cat:"Quarter To"},
+{t:'clock',h:1,m:45,q:'What time is shown?',opts:["quarter to 1","quarter to 2","quarter past 1","half past 1"],c:1,cat:"Quarter To"},
+{t:'clock',h:8,m:45,q:'What time is shown?',opts:["quarter past 9","quarter to 9","half past 8","quarter to 8"],c:1,cat:"Quarter To"},
+{t:'clock',h:5,m:45,q:'What time is shown?',opts:["quarter past 6","quarter to 6","half past 5","quarter to 5"],c:1,cat:"Quarter To"},
+{t:'clock',h:10,m:15,q:'What time is shown?',opts:["half past 10","quarter past 10","10 o'clock","quarter to 10"],c:1,cat:"Quarter Past"},
+{t:'clock',h:11,m:30,q:'Type the time shown:',isText:true,c:['half past 11','half past eleven'],cat:"Half Past"},
+{t:'clock',h:3,m:30,q:'Type the time shown:',isText:true,c:['half past 3','half past three'],cat:"Half Past"},
+{t:'clock',h:7,m:15,q:'Type the time shown:',isText:true,c:['quarter past 7','quarter past seven'],cat:"Quarter Past"},
+{t:'clock',h:2,m:45,q:'Type the time shown:',isText:true,c:['quarter to 3','quarter to three'],cat:"Quarter To"},
+
+// Digital clocks 30-49
+{t:'digital',dig:'07:30',q:'What time does the digital clock show?',opts:["7 o'clock","half past 7","quarter past 7","quarter to 7"],c:1,cat:'Digital'},
+{t:'digital',dig:'03:15',q:'What time does the digital clock show?',opts:["quarter to 3","quarter past 3","half past 3","3 o'clock"],c:1,cat:'Digital'},
+{t:'digital',dig:'05:45',q:'What time does the digital clock show?',opts:["quarter past 5","quarter to 6","half past 5","quarter to 5"],c:1,cat:'Digital'},
+{t:'digital',dig:'12:00',q:'What time does the digital clock show?',opts:["half past 12","12 o'clock","quarter past 12","quarter to 12"],c:1,cat:'Digital'},
+{t:'digital',dig:'09:30',q:'What time does the digital clock show?',opts:["9 o'clock","quarter past 9","half past 9","quarter to 9"],c:2,cat:'Digital'},
+{t:'digital',dig:'02:15',q:'What time does the digital clock show?',opts:["quarter to 2","2 o'clock","half past 2","quarter past 2"],c:3,cat:'Digital'},
+{t:'digital',dig:'06:45',q:'What time does the digital clock show?',opts:["quarter past 6","quarter past 7","quarter to 7","half past 6"],c:2,cat:'Digital'},
+{t:'digital',dig:'01:00',q:'What time does the digital clock show?',opts:["12 o'clock","1 o'clock","2 o'clock","11 o'clock"],c:1,cat:'Digital'},
+{t:'digital',dig:'04:30',q:'What time does the digital clock show?',opts:["4 o'clock","quarter past 4","quarter to 4","half past 4"],c:3,cat:'Digital'},
+{t:'digital',dig:'11:15',q:'What time does the digital clock show?',opts:["quarter to 11","quarter past 11","half past 11","11 o'clock"],c:1,cat:'Digital'},
+{t:'digital',dig:'08:45',q:'What time does the digital clock show?',opts:["quarter to 8","quarter past 8","quarter past 9","quarter to 9"],c:3,cat:'Digital'},
+{t:'digital',dig:'10:00',q:'What time does the digital clock show?',opts:["9 o'clock","10 o'clock","11 o'clock","12 o'clock"],c:1,cat:'Digital'},
+{t:'digital',dig:'03:30',q:'What time does the digital clock show?',opts:["3 o'clock","quarter past 3","half past 3","quarter to 3"],c:2,cat:'Digital'},
+{t:'digital',dig:'07:15',q:'What time does the digital clock show?',opts:["7 o'clock","quarter to 7","half past 7","quarter past 7"],c:3,cat:'Digital'},
+{t:'digital',dig:'02:00',q:'What time does the digital clock show?',opts:["2 o'clock","3 o'clock","1 o'clock","12 o'clock"],c:0,cat:'Digital'},
+{t:'digital',dig:'05:30',q:'What time does the digital clock show?',opts:["5 o'clock","quarter past 5","half past 5","quarter to 5"],c:2,cat:'Digital'},
+{t:'digital',dig:'09:00',q:'What time does the digital clock show?',opts:["8 o'clock","9 o'clock","10 o'clock","11 o'clock"],c:1,cat:'Digital'},
+{t:'digital',dig:'06:15',q:'What time does the digital clock show?',opts:["quarter to 6","6 o'clock","quarter past 6","half past 6"],c:2,cat:'Digital'},
+{t:'digital',dig:'12:30',q:'What time does the digital clock show?',opts:["12 o'clock","half past 11","quarter past 12","half past 12"],c:3,cat:'Digital'},
+{t:'digital',dig:'04:45',q:'What time does the digital clock show?',opts:["quarter past 4","quarter to 4","quarter to 5","half past 4"],c:2,cat:'Digital'},
+
+// Knowledge questions 50-99
+{t:'mc',q:'How many minutes in one hour?',opts:['30','60','100','24'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'How many hours in one day?',opts:['12','24','60','48'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'How many seconds in one minute?',opts:['30','60','100','10'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'At HALF PAST, where does the long hand point?',opts:['12 top','3 right','6 bottom','9 left'],c:2,cat:'Clock Knowledge'},
+{t:'mc',q:'At QUARTER PAST, where does the long hand point?',opts:['12','3','6','9'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'At QUARTER TO, where does the long hand point?',opts:['12','3','6','9'],c:3,cat:'Clock Knowledge'},
+{t:'mc',q:'The short hand shows the...',opts:['minutes','seconds','hours','date'],c:2,cat:'Clock Knowledge'},
+{t:'mc',q:'The long hand shows the...',opts:['hours','seconds','date','minutes'],c:3,cat:'Clock Knowledge'},
+{t:'mc',q:'School starts at 9 in the morning. Is that AM or PM?',opts:['AM','PM'],c:0,cat:'AM/PM'},
+{t:'mc',q:'Bedtime is at 8 in the evening. Is that AM or PM?',opts:['AM','PM'],c:1,cat:'AM/PM'},
+{t:'mc',q:'Lunch is at 12 in the afternoon. Is that AM or PM?',opts:['AM','PM'],c:1,cat:'AM/PM'},
+{t:'mc',q:'Midnight is 12:00. Is that AM or PM?',opts:['AM','PM'],c:0,cat:'AM/PM'},
+{t:'mc',q:'Noon (midday) is which time?',opts:['12:00 AM','12:00 PM','6:00 AM','6:00 PM'],c:1,cat:'AM/PM'},
+{t:'mc',q:'Lunch starts at 12 o\'clock. It lasts 30 mins. When does it end?',opts:['12 o\'clock','half past 12','quarter past 12','1 o\'clock'],c:1,cat:'Time Maths'},
+{t:'mc',q:'A film starts at 3 and lasts 1 hour. When does it end?',opts:['3 o\'clock','half past 3','4 o\'clock','5 o\'clock'],c:2,cat:'Time Maths'},
+{t:'mc',q:'Swimming starts at 2 and lasts 30 minutes. When does it end?',opts:['2 o\'clock','quarter past 2','half past 2','quarter to 3'],c:2,cat:'Time Maths'},
+{t:'mc',q:'School finishes at half past 3. How many minutes after 3 o\'clock?',opts:['15','25','30','45'],c:2,cat:'Time Maths'},
+{t:'mc',q:'How many minutes is quarter past to half past?',opts:['10','15','20','25'],c:1,cat:'Time Maths'},
+{t:'mc',q:'How many minutes from 1 o\'clock to 2 o\'clock?',opts:['30','45','60','90'],c:2,cat:'Time Maths'},
+{t:'mc',q:'How many minutes from quarter past to quarter to (the same hour)?',opts:['15','30','45','60'],c:1,cat:'Time Maths'},
+{t:'mc',q:'If it is 3 o\'clock now, what time will it be in 2 hours?',opts:['4 o\'clock','5 o\'clock','6 o\'clock','7 o\'clock'],c:1,cat:'Time Maths'},
+{t:'mc',q:'At o\'clock, where does the long (minute) hand point?',opts:['12','3','6','9'],c:0,cat:'Clock Knowledge'},
+{t:'mc',q:'How many minutes between quarter past and half past?',opts:['10','15','20','25'],c:1,cat:'Time Maths'},
+{t:'mc',q:'How many days in a year (usually)?',opts:['300','355','365','370'],c:2,cat:'Clock Knowledge'},
+{t:'mc',q:'What comes before 12 o\'clock at night?',opts:['11 o\'clock PM','1 o\'clock AM','11 o\'clock AM','1 o\'clock PM'],c:0,cat:'AM/PM'},
+{t:'mc',q:'A lesson starts at quarter past 9. How many minutes past 9 is that?',opts:['10','15','20','30'],c:1,cat:'Time Maths'},
+{t:'mc',q:'Quarter to 5 means how many minutes to 5 o\'clock?',opts:['10','15','20','25'],c:1,cat:'Time Maths'},
+{t:'mc',q:'Half past means how many minutes past the hour?',opts:['15','25','30','45'],c:2,cat:'Clock Knowledge'},
+{t:'mc',q:'Quarter past means how many minutes past the hour?',opts:['10','15','20','25'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'If it is half past 4, what time will it be in 30 minutes?',opts:['4 o\'clock','half past 5','5 o\'clock','quarter to 5'],c:2,cat:'Time Maths'},
+{t:'mc',q:'How many hours from 9 AM to 3 PM?',opts:['4','5','6','7'],c:2,cat:'Time Maths'},
+{t:'mc',q:'How many weeks in a year?',opts:['48','50','52','54'],c:2,cat:'Clock Knowledge'},
+{t:'mc',q:'Which is longer: 1 hour or 50 minutes?',opts:['50 minutes','1 hour','same','cannot tell'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'If it is quarter to 3, how many minutes until 3 o\'clock?',opts:['10','15','20','30'],c:1,cat:'Time Maths'},
+{t:'mc',q:'A programme starts at 6 and lasts 30 minutes. When does it end?',opts:['6 o\'clock','quarter past 6','half past 6','quarter to 7'],c:2,cat:'Time Maths'},
+{t:'mc',q:'How many minutes in half an hour?',opts:['15','20','30','45'],c:2,cat:'Clock Knowledge'},
+{t:'mc',q:'How many minutes in a quarter of an hour?',opts:['10','15','20','25'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'True or false: There are 60 seconds in a minute.',opts:['True','False'],c:0,cat:'Clock Knowledge'},
+{t:'mc',q:'True or false: There are 60 minutes in a day.',opts:['True','False'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'True or false: There are 24 hours in a day.',opts:['True','False'],c:0,cat:'Clock Knowledge'},
+{t:'mc',q:'True or false: A clock face shows numbers 1–13.',opts:['True','False'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'True or false: PM means the morning.',opts:['True','False'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'If a TV show starts at half past 7 and lasts 1 hour, when does it end?',opts:['7 o\'clock','half past 7','half past 8','8 o\'clock'],c:2,cat:'Time Maths'},
+{t:'mc',q:'Which is earlier in the day: 7 AM or 7 PM?',opts:['7 AM','7 PM','same time','cannot tell'],c:0,cat:'AM/PM'},
+{t:'mc',q:'How many hours are there from 8 AM to 12 PM?',opts:['2','3','4','5'],c:2,cat:'Time Maths'},
+{t:'mc',q:'Breakfast is at 7:30. School starts at 9:00. How long between them?',opts:['30 mins','1 hour','1 hour 30 mins','2 hours'],c:2,cat:'Time Maths'},
+{t:'mc',q:'If the minute hand points to 12, it is...',opts:['quarter past','half past','quarter to','o\'clock'],c:3,cat:'Clock Knowledge'},
+{t:'mc',q:'If the minute hand points to 6, it is...',opts:['quarter past','half past','quarter to','o\'clock'],c:1,cat:'Clock Knowledge'},
+{t:'mc',q:'If the minute hand points to 3, it is...',opts:['quarter past','half past','quarter to','o\'clock'],c:0,cat:'Clock Knowledge'},
+{t:'mc',q:'If the minute hand points to 9, it is...',opts:['quarter past','half past','quarter to','o\'clock'],c:2,cat:'Clock Knowledge'},
+];
+
+// ============================================================
+// SECTIONS
+// ============================================================
+const SECTIONS = { english: [], maths: [], clock: [] };
+const answered = {};
+const scores = { english:{c:0,t:0}, maths:{c:0,t:0}, clock:{c:0,t:0} };
+let clockSvgCount = 0;
+
+// Build ID lists
+ENGLISH_DATA.forEach((_,i) => SECTIONS.english.push('eq'+(i+1)));
+MATHS_DATA.forEach((_,i)   => SECTIONS.maths.push('mq'+(i+1)));
+CLOCK_DATA.forEach((_,i)   => SECTIONS.clock.push('cq'+(i+1)));
+
+// ============================================================
+// CLOCK DRAWING
+// ============================================================
+function drawClock(svgId, h, m) {
+  const el = document.getElementById(svgId); if(!el) return;
+  const cx=70,cy=70,r=62,toR=d=>d*Math.PI/180;
+  let s = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="white" stroke="#3a3a5c" stroke-width="4"/>`;
+  for(let i=1;i<=12;i++){const a=toR(i*30-90);s+=`<text x="${cx+Math.cos(a)*48}" y="${cy+Math.sin(a)*48+5}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="12" fill="#3a3a5c">${i}</text>`;}
+  for(let i=0;i<60;i++){const a=toR(i*6-90),len=i%5===0?8:4,x1=cx+Math.cos(a)*(r-4),y1=cy+Math.sin(a)*(r-4),x2=cx+Math.cos(a)*(r-4-len),y2=cy+Math.sin(a)*(r-4-len);s+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#bbb" stroke-width="${i%5===0?2:1}"/>`;}
+  const ha=toR((h%12)*30+m*0.5-90);s+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(ha)*30}" y2="${cy+Math.sin(ha)*30}" stroke="#3a3a5c" stroke-width="5" stroke-linecap="round"/>`;
+  const ma=toR(m*6-90);s+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(ma)*46}" y2="${cy+Math.sin(ma)*46}" stroke="#667eea" stroke-width="3" stroke-linecap="round"/>`;
+  s+=`<circle cx="${cx}" cy="${cy}" r="5" fill="#3a3a5c"/>`;
+  el.innerHTML=s;
+}
+
+// ============================================================
+// RENDER QUESTIONS
+// ============================================================
+function buildCard(qid, data, section) {
+  const card = document.createElement('div');
+  card.className = `q-card ${section}-card`;
+  card.id = qid;
+
+  const catLabel = data.cat ? ` · ${data.cat}` : '';
+  const num = parseInt(qid.replace(/[a-z]/g,''));
+  card.innerHTML = `<div class="q-num">Q${num}${catLabel}</div><div class="q-text">${data.q}</div>`;
+
+  // Clock face
+  if (data.t === 'clock') {
+    clockSvgCount++;
+    const svgId = `clksvg_${qid}`;
+    const wrap = document.createElement('div');
+    wrap.className = 'clock-wrap';
+    wrap.innerHTML = `<svg id="${svgId}" width="140" height="140"></svg>`;
+    card.appendChild(wrap);
+    setTimeout(() => drawClock(svgId, data.h, data.m), 0);
+  }
+
+  // Digital display
+  if (data.t === 'digital') {
+    const dEl = document.createElement('div');
+    dEl.style.textAlign = 'center';
+    dEl.style.marginBottom = '10px';
+    dEl.innerHTML = `<span class="dig">${data.dig}</span>`;
+    card.appendChild(dEl);
+  }
+
+  const fb = document.createElement('div');
+  fb.className = 'fb';
+  fb.id = qid + '-fb';
+
+  // Text input
+  if (data.t === 'text' || (data.t === 'clock' && data.isText)) {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'ti';
+    inp.id = qid + '-in';
+    inp.placeholder = 'Type your answer...';
+    inp.autocomplete = 'off';
+    card.appendChild(inp);
+    const btn = document.createElement('button');
+    btn.className = 'mb';
+    btn.textContent = 'Check ✓';
+    btn.onclick = () => markTextQ(qid, data.c);
+    card.appendChild(btn);
+    card.appendChild(fb);
+    return card;
+  }
+
+  // Multiple choice
+  const grid = document.createElement('div');
+  grid.className = 'choices';
+  data.opts.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'cb';
+    b.dataset.q = qid;
+    b.dataset.idx = i;
+    b.textContent = opt;
+    b.addEventListener('click', function() { handleMC(qid, i, data.c); });
+    grid.appendChild(b);
+  });
+  card.appendChild(grid);
+  card.appendChild(fb);
+  return card;
+}
+
+function renderAll() {
+  const eContainer = document.getElementById('english-qs');
+  const mContainer = document.getElementById('maths-qs');
+  const cContainer = document.getElementById('clock-qs');
+
+  ENGLISH_DATA.forEach((d,i) => eContainer.appendChild(buildCard('eq'+(i+1), d, 'english')));
+  MATHS_DATA.forEach((d,i)   => mContainer.appendChild(buildCard('mq'+(i+1), d, 'maths')));
+  CLOCK_DATA.forEach((d,i)   => cContainer.appendChild(buildCard('cq'+(i+1), d, 'clock')));
+}
+
+// ============================================================
+// MARKING
+// ============================================================
+function handleMC(qid, chosen, correct) {
+  if (answered[qid]) return;
+  answered[qid] = true;
+  const isOk = chosen === correct;
+  document.querySelectorAll(`[data-q="${qid}"]`).forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.dataset.idx) === correct) b.classList.add('ca');
+  });
+  if (!isOk) document.querySelector(`[data-q="${qid}"][data-idx="${chosen}"]`).classList.add('wa');
+  setFeedback(qid, isOk);
+  recordScore(qid, isOk);
+}
+
+function markTextQ(qid, accepted) {
+  if (answered[qid]) return;
+  const inp = document.getElementById(qid + '-in');
+  if (!inp) return;
+  const val = inp.value.trim().toLowerCase();
+  if (!val) { alert('Please type an answer first!'); return; }
+  answered[qid] = true;
+  const isOk = accepted.some(a => val === a.toLowerCase() || val === a.toLowerCase().replace(/[^a-z0-9]/g,''));
+  inp.disabled = true;
+  inp.classList.add(isOk ? 'correct' : 'wrong');
+  setFeedback(qid, isOk, accepted[0]);
+  recordScore(qid, isOk);
+}
+
+function setFeedback(qid, ok, correctAnswer) {
+  const card = document.getElementById(qid);
+  const fb = document.getElementById(qid + '-fb');
+  card.classList.add(ok ? 'correct' : 'wrong');
+  fb.className = 'fb show ' + (ok ? 'correct' : 'wrong');
+  fb.textContent = ok ? '✅ Correct! Well done!' : ('❌ Not quite.' + (correctAnswer ? ' Correct answer: ' + correctAnswer : ' The correct answer is highlighted green.'));
+}
+
+// ============================================================
+// SCORES
+// ============================================================
+function getSectionOf(qid) {
+  if (qid.startsWith('eq')) return 'english';
+  if (qid.startsWith('mq')) return 'maths';
+  if (qid.startsWith('cq')) return 'clock';
+  return null;
+}
+function recordScore(qid, ok) {
+  const sec = getSectionOf(qid); if (!sec) return;
+  scores[sec].t++; if(ok) scores[sec].c++;
+  updateScores();
+}
+function updateScores() {
+  const e=scores.english,m=scores.maths,c=scores.clock;
+  document.getElementById('eng-score').textContent = e.c+'/'+e.t;
+  document.getElementById('math-score').textContent = m.c+'/'+m.t;
+  document.getElementById('clock-score').textContent = c.c+'/'+c.t;
+  document.getElementById('total-score').textContent = (e.c+m.c+c.c)+'/'+(e.t+m.t+c.t);
+}
+
+// switchTab now defined below with results support
+
+// ============================================================
+// MARK ALL
+// ============================================================
+function markAll(section) {
+  const dataMap = {english: ENGLISH_DATA, maths: MATHS_DATA, clock: CLOCK_DATA};
+  const prefix = {english:'eq', maths:'mq', clock:'cq'}[section];
+  const data = dataMap[section];
+  data.forEach((d, i) => {
+    const qid = prefix+(i+1);
+    if (answered[qid]) return;
+    if (d.t === 'text' || (d.t === 'clock' && d.isText)) {
+      const inp = document.getElementById(qid+'-in');
+      if(inp) { inp.value = d.c[0]; markTextQ(qid, d.c); }
+    } else {
+      handleMC(qid, d.c, d.c);
+    }
+  });
+  setTimeout(() => showResult(section), 200);
+}
+
+// ============================================================
+// RESULT
+// ============================================================
+function showResult(section) {
+  const sc = scores[section];
+  const total = SECTIONS[section].length;
+  const pct = sc.c / total;
+  let stars, msg;
+  if (pct>=0.9){stars='⭐⭐⭐⭐⭐';msg='Superstar! Outstanding! 🎉';}
+  else if(pct>=0.7){stars='⭐⭐⭐⭐';msg='Brilliant work! Well done! 🌟';}
+  else if(pct>=0.5){stars='⭐⭐⭐';msg='Good try! Keep practising! 👍';}
+  else if(pct>=0.3){stars='⭐⭐';msg="Keep going! You're learning! 💪";}
+  else {stars='⭐';msg="Don't give up! Try again! 🤗";}
+  const p = {english:'eng',maths:'math',clock:'clock'}[section];
+  document.getElementById(p+'-stars').textContent = stars;
+  document.getElementById(p+'-msg').textContent = msg;
+  document.getElementById(p+'-sub').textContent = 'You got '+sc.c+' out of '+total+' correct';
+  document.getElementById(p+'-result').classList.add('show');
+}
+
+// ============================================================
+// RESET
+// ============================================================
+function resetSection(section) {
+  if (!confirm('Reset all answers in this section?')) return;
+  const prefix = {english:'eq',maths:'mq',clock:'cq'}[section];
+  SECTIONS[section].forEach(qid => {
+    delete answered[qid];
+    const card = document.getElementById(qid); if(!card) return;
+    card.classList.remove('correct','wrong');
+    document.querySelectorAll(`[data-q="${qid}"]`).forEach(b => { b.disabled=false; b.classList.remove('ca','wa'); });
+    const inp = document.getElementById(qid+'-in');
+    if(inp){inp.disabled=false;inp.value='';inp.classList.remove('correct','wrong');}
+    const fb = document.getElementById(qid+'-fb');
+    if(fb){fb.className='fb';fb.textContent='';}
+  });
+  scores[section]={c:0,t:0};
+  updateScores();
+  const p={english:'eng',maths:'math',clock:'clock'}[section];
+  document.getElementById(p+'-result').classList.remove('show');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderAll();
+
+// ============================================================
+// RESULTS TAB
+// ============================================================
+function switchTab(n) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(n).classList.add('active');
+  document.querySelector('.tab-btn.'+n).classList.add('active');
+  if (n === 'results') showResults();
+}
+
+const userAnswers = {}; // qid -> {given, correct, isOk, question, correctAnswer}
+
+// Override recordScore to also store answer details
+const _origHandleMC = handleMC;
+function handleMC(qid, chosen, correct) {
+  if (answered[qid]) return;
+  const dataMap = {eq: ENGLISH_DATA, mq: MATHS_DATA, cq: CLOCK_DATA};
+  const prefix = qid.match(/^[a-z]+/)[0];
+  const idx = parseInt(qid.replace(/[a-z]/g,'')) - 1;
+  const data = dataMap[prefix][idx];
+  const isOk = chosen === correct;
+  userAnswers[qid] = {
+    given: data.opts[chosen],
+    correct: data.opts[correct],
+    isOk,
+    question: data.q,
+    cat: data.cat || ''
+  };
+  answered[qid] = true;
+  document.querySelectorAll('[data-q="'+qid+'"]').forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.dataset.idx) === correct) b.classList.add('ca');
+  });
+  if (!isOk) { const w=document.querySelector('[data-q="'+qid+'"][data-idx="'+chosen+'"]'); if(w) w.classList.add('wa'); }
+  setFeedback(qid, isOk);
+  recordScore(qid, isOk);
+}
+
+const _origMarkTextQ = markTextQ;
+function markTextQ(qid, accepted) {
+  if (answered[qid]) return;
+  const inp = document.getElementById(qid+'-in');
+  if (!inp) return;
+  const val = inp.value.trim().toLowerCase();
+  if (!val) { alert('Please type an answer first!'); return; }
+  const isOk = accepted.some(a => val === a.toLowerCase() || val === a.toLowerCase().replace(/[^a-z0-9]/g,''));
+  const dataMap = {eq: ENGLISH_DATA, mq: MATHS_DATA, cq: CLOCK_DATA};
+  const prefix = qid.match(/^[a-z]+/)[0];
+  const idx = parseInt(qid.replace(/[a-z]/g,'')) - 1;
+  const data = dataMap[prefix][idx];
+  userAnswers[qid] = {
+    given: inp.value.trim(),
+    correct: accepted[0],
+    isOk,
+    question: data.q,
+    cat: data.cat || ''
+  };
+  answered[qid] = true;
+  inp.disabled = true; inp.classList.add(isOk ? 'correct' : 'wrong');
+  setFeedback(qid, isOk, accepted[0]);
+  recordScore(qid, isOk);
+}
+
+function showResults() {
+  const list = document.getElementById('results-list');
+  const summary = document.getElementById('results-summary');
+  list.innerHTML = '';
+  summary.innerHTML = '';
+
+  const sectionInfo = [
+    {key:'english', label:'📖 English', prefix:'eq', data:ENGLISH_DATA, color:'#FF6B9D'},
+    {key:'maths',   label:'🔢 Maths',   prefix:'mq', data:MATHS_DATA,   color:'#4D96FF'},
+    {key:'clock',   label:'🕐 Clock',   prefix:'cq', data:CLOCK_DATA,   color:'#6BCB77'},
+  ];
+
+  sectionInfo.forEach(sec => {
+    const sc = scores[sec.key];
+    const pill = document.createElement('div');
+    pill.className = 'sum-pill';
+    pill.style.background = sec.color;
+    pill.textContent = sec.label + ': ' + sc.c + '/' + sc.t;
+    summary.appendChild(pill);
+  });
+
+  const total = scores.english.c + scores.maths.c + scores.clock.c;
+  const totalT = scores.english.t + scores.maths.t + scores.clock.t;
+  const totPill = document.createElement('div');
+  totPill.className = 'sum-pill';
+  totPill.style.background = 'linear-gradient(135deg,#667eea,#764ba2)';
+  totPill.textContent = '🏆 Total: '+total+'/'+totalT;
+  summary.appendChild(totPill);
+
+  if (totalT === 0) {
+    list.innerHTML = '<p style="color:#999;font-weight:700;padding:20px 0;">No questions answered yet. Go to English, Maths or Clock tabs to start!</p>';
+    return;
+  }
+
+  sectionInfo.forEach(sec => {
+    const head = document.createElement('div');
+    head.className = 'r-section-head';
+    head.style.color = sec.color;
+    head.textContent = sec.label;
+    list.appendChild(head);
+
+    sec.data.forEach((d, i) => {
+      const qid = sec.prefix + (i+1);
+      const card = document.createElement('div');
+      const ans = userAnswers[qid];
+      const isAnswered = !!answered[qid];
+
+      if (!isAnswered) {
+        card.className = 'r-card r-skip';
+        card.innerHTML = '<div class="r-label">Q'+(i+1)+' · '+d.cat+'</div><div class="r-q">'+d.q+'</div><div class="r-ans" style="color:#999;">⬜ Not answered yet</div>';
+      } else if (ans) {
+        card.className = 'r-card ' + (ans.isOk ? 'r-correct' : 'r-wrong');
+        card.innerHTML = '<div class="r-label">Q'+(i+1)+' · '+d.cat+'</div>'
+          + '<div class="r-q">'+d.q+'</div>'
+          + '<div class="r-ans">'+(ans.isOk ? '✅' : '❌')+' Your answer: <span>'+ans.given+'</span></div>'
+          + (!ans.isOk ? '<div class="r-ans" style="color:#1A7F37;">✔ Correct answer: <span>'+ans.correct+'</span></div>' : '');
+      } else {
+        card.className = 'r-card r-skip';
+        card.innerHTML = '<div class="r-label">Q'+(i+1)+' · '+d.cat+'</div><div class="r-q">'+d.q+'</div><div class="r-ans" style="color:#999;">⬜ Not answered yet</div>';
+      }
+      list.appendChild(card);
+    });
+  });
+}
+
+// ============================================================
+// FIREBASE SAVE / LOAD
+// ============================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDR4BXnPh1ZJVgE3SVdH7_Pk6YgeXg1U",
+  authDomain: "school-work-4f82e.firebaseapp.com",
+  projectId: "school-work-4f82e",
+  storageBucket: "school-work-4f82e.firebasestorage.app",
+  messagingSenderId: "919583642",
+  appId: "1:919583642:web:475f37fe17ead63223a35e3"
+};
+
+let db;
+try {
+  const app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+} catch(e) { console.warn('Firebase init failed', e); }
+
+async function saveToFirebase() {
+  const status = document.getElementById('firebase-status');
+  const name = document.getElementById('child-name').value.trim() || 'Child';
+  if (!db) { status.textContent = '⚠️ Firebase not connected. Check your config.'; status.style.color='#FF4757'; return; }
+  try {
+    status.textContent = '💾 Saving...';
+    const payload = {
+      name,
+      savedAt: new Date().toISOString(),
+      scores,
+      userAnswers
+    };
+    await setDoc(doc(db, 'schoolResults', 'latest'), payload);
+    status.textContent = '✅ Saved! Results for ' + name + ' saved to Firebase.';
+    status.style.color = '#6BCB77';
+  } catch(e) {
+    status.textContent = '❌ Save failed: ' + e.message;
+    status.style.color = '#FF4757';
+  }
+}
+
+async function loadFromFirebase() {
+  const status = document.getElementById('firebase-status');
+  if (!db) { status.textContent = '⚠️ Firebase not connected.'; status.style.color='#FF4757'; return; }
+  try {
+    status.textContent = '📥 Loading...';
+    const snap = await getDoc(doc(db, 'schoolResults', 'latest'));
+    if (!snap.exists()) { status.textContent = '⚠️ No saved results found.'; return; }
+    const data = snap.data();
+    Object.assign(scores, data.scores || {});
+    Object.assign(userAnswers, data.userAnswers || {});
+    Object.assign(answered, Object.fromEntries(Object.keys(data.userAnswers||{}).map(k=>[k,true])));
+    const name = data.name || 'Child';
+    document.getElementById('child-name').value = name;
+    updateScores();
+    showResults();
+    status.textContent = '✅ Loaded results for ' + name + ' (saved ' + new Date(data.savedAt).toLocaleString() + ')';
+    status.style.color = '#6BCB77';
+  } catch(e) {
+    status.textContent = '❌ Load failed: ' + e.message;
+    status.style.color = '#FF4757';
+  }
+}
+
+</script>
+</body>
+</html>
