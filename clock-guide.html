@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🕐 Learn to Tell the Time!</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:#FFF8EE;color:#2C3E50;min-height:100vh;padding-bottom:40px;}
+header{background:linear-gradient(135deg,#667eea,#764ba2);color:white;text-align:center;padding:24px 16px;}
+header h1{font-family:'Fredoka One',cursive;font-size:2rem;}
+header p{font-size:.95rem;opacity:.9;margin-top:4px;}
+
+.tabs{display:flex;overflow-x:auto;background:white;border-bottom:3px solid #EEE;}
+.tab{flex:1;min-width:80px;padding:14px 6px;border:none;background:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;color:#999;border-bottom:4px solid transparent;cursor:pointer;white-space:nowrap;}
+.tab.active{color:#667eea;border-bottom-color:#667eea;}
+
+.page{display:none;max-width:700px;margin:0 auto;padding:20px 14px;}
+.page.active{display:block;}
+
+h2{font-family:'Fredoka One',cursive;font-size:1.6rem;margin-bottom:16px;text-align:center;}
+
+/* LESSON CARDS */
+.lesson{background:white;border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 3px 14px rgba(0,0,0,.08);}
+.lesson h3{font-family:'Fredoka One',cursive;font-size:1.3rem;margin-bottom:12px;}
+.lesson p{font-size:1rem;font-weight:700;line-height:1.6;margin-bottom:10px;}
+.tip{background:#FFF3CD;border-left:5px solid #FFD93D;border-radius:10px;padding:12px 16px;font-weight:800;font-size:.95rem;margin-top:10px;}
+.tip::before{content:'💡 ';} 
+
+/* CLOCK GRID */
+.clock-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+.clock-item{text-align:center;}
+.clock-label{font-weight:800;font-size:1rem;margin-top:8px;color:#2C3E50;}
+.clock-sublabel{font-size:.85rem;font-weight:700;color:#667eea;margin-top:2px;}
+
+/* HAND LEGEND */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;}
+.legend-item{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.9rem;}
+.hand-dot{width:14px;height:14px;border-radius:50%;}
+
+/* RULE BOXES */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.rule-box{border-radius:12px;padding:14px;text-align:center;}
+.rule-box .rule-time{font-family:'Fredoka One',cursive;font-size:1.1rem;margin-bottom:4px;}
+.rule-box .rule-hand{font-size:.85rem;font-weight:800;}
+
+/* QUIZ */
+.quiz-card{background:white;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.07);}
+.quiz-q{font-weight:800;font-size:1rem;margin-bottom:12px;}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.qbtn{padding:11px;border-radius:10px;border:2.5px solid #E0E0E0;background:#FAFAFA;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;cursor:pointer;}
+.qbtn:hover{border-color:#667eea;background:#F0F4FF;}
+.qbtn.correct{border-color:#6BCB77;background:#E6F9ED;color:#1A7F37;}
+.qbtn.wrong{border-color:#FF4757;background:#FFF0F0;color:#FF4757;}
+.qbtn:disabled{cursor:default;}
+.qfb{margin-top:10px;padding:10px;border-radius:8px;font-weight:800;display:none;}
+.qfb.show{display:block;}
+.qfb.c{background:#D4EDDA;color:#155724;}
+.qfb.w{background:#F8D7DA;color:#721C24;}
+
+.score-bar{background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:14px;padding:16px;text-align:center;margin-bottom:18px;font-family:'Fredoka One',cursive;font-size:1.2rem;}
+
+@media(max-width:480px){.clock-grid{grid-template-columns:1fr 1fr;}.rules{grid-template-columns:1fr 1fr;}.quiz-opts{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🕐 Learn to Tell the Time!</h1>
+  <p>A simple guide for learning clocks · Age 7</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPage('p1')">1️⃣ The Hands</button>
+  <button class="tab" onclick="showPage('p2')">2️⃣ O'Clock</button>
+  <button class="tab" onclick="showPage('p3')">3️⃣ Half Past</button>
+  <button class="tab" onclick="showPage('p4')">4️⃣ Quarter</button>
+  <button class="tab" onclick="showPage('p5')">✏️ Practice</button>
+</div>
+
+<!-- PAGE 1: THE HANDS -->
+<div id="p1" class="page active">
+  <h2>🖐️ The Two Hands</h2>
+
+  <div class="lesson">
+    <h3 style="color:#3a3a5c">Every clock has 2 hands:</h3>
+    <div class="legend">
+      <div class="legend-item"><div class="hand-dot" style="background:#3a3a5c;width:18px;height:18px;border-radius:3px;"></div> <span>SHORT hand = HOURS 🕐</span></div>
+      <div class="legend-item"><div class="hand-dot" style="background:#667eea;width:18px;height:18px;border-radius:3px;"></div> <span>LONG hand = MINUTES ⏱️</span></div>
+    </div>
+    <p>The <strong>short hand</strong> (dark) tells us the <strong>hour</strong> — like 1, 2, 3...</p>
+    <p>The <strong>long hand</strong> (blue) tells us the <strong>minutes</strong>.</p>
+    <div class="tip">The SHORT hand is STUBBY. The LONG hand is TALL. Easy to remember!</div>
+  </div>
+
+  <div class="lesson">
+    <h3 style="color:#667eea">Where does the long hand point?</h3>
+    <div class="rules">
+      <div class="rule-box" style="background:#E8F4FE;">
+        <div style="font-size:2rem;">12</div>
+        <div class="rule-time">O'Clock</div>
+        <div class="rule-hand">Long hand → 12 (top)</div>
+      </div>
+      <div class="rule-box" style="background:#EAFBEA;">
+        <div style="font-size:2rem;">6</div>
+        <div class="rule-time">Half Past</div>
+        <div class="rule-hand">Long hand → 6 (bottom)</div>
+      </div>
+      <div class="rule-box" style="background:#FEE8F0;">
+        <div style="font-size:2rem;">3</div>
+        <div class="rule-time">Quarter Past</div>
+        <div class="rule-hand">Long hand → 3 (right)</div>
+      </div>
+      <div class="rule-box" style="background:#FFF3CD;">
+        <div style="font-size:2rem;">9</div>
+        <div class="rule-time">Quarter To</div>
+        <div class="rule-hand">Long hand → 9 (left)</div>
+      </div>
+    </div>
+    <div class="tip">Learn these 4 positions and you can tell ANY time!</div>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <button onclick="showPage('p2')" style="padding:14px 34px;border-radius:50px;border:none;background:linear-gradient(135deg,#667eea,#764ba2);color:white;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;">Next: O'Clock ➜</button>
+  </div>
+</div>
+
+<!-- PAGE 2: O'CLOCK -->
+<div id="p2" class="page">
+  <h2>🕐 O'Clock</h2>
+
+  <div class="lesson">
+    <h3 style="color:#3a3a5c">How to spot O'Clock:</h3>
+    <p>✅ The <strong>long hand</strong> points straight <strong>UP to 12</strong></p>
+    <p>✅ The <strong>short hand</strong> points to the <strong>hour number</strong></p>
+    <div class="tip">If the long hand is at 12 — it's always O'Clock!</div>
+  </div>
+
+  <div class="lesson">
+    <h3>Examples:</h3>
+    <div class="clock-grid" id="oclock-grid"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:16px;">
+    <button onclick="showPage('p3')" style="padding:14px 34px;border-radius:50px;border:none;background:linear-gradient(135deg,#667eea,#764ba2);color:white;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;">Next: Half Past ➜</button>
+  </div>
+</div>
+
+<!-- PAGE 3: HALF PAST -->
+<div id="p3" class="page">
+  <h2>🕕 Half Past</h2>
+
+  <div class="lesson">
+    <h3 style="color:#3a3a5c">How to spot Half Past:</h3>
+    <p>✅ The <strong>long hand</strong> points straight <strong>DOWN to 6</strong></p>
+    <p>✅ The <strong>short hand</strong> is <strong>between</strong> two numbers</p>
+    <p>✅ It means <strong>30 minutes</strong> past the hour</p>
+    <div class="tip">Half past 3 = 3:30. The short hand is halfway between 3 and 4!</div>
+  </div>
+
+  <div class="lesson">
+    <h3>Examples:</h3>
+    <div class="clock-grid" id="halfpast-grid"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:16px;">
+    <button onclick="showPage('p4')" style="padding:14px 34px;border-radius:50px;border:none;background:linear-gradient(135deg,#667eea,#764ba2);color:white;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;">Next: Quarter ➜</button>
+  </div>
+</div>
+
+<!-- PAGE 4: QUARTER PAST / TO -->
+<div id="p4" class="page">
+  <h2>🕒 Quarter Past &amp; Quarter To</h2>
+
+  <div class="lesson">
+    <h3 style="color:#FF6B9D">Quarter Past:</h3>
+    <p>✅ Long hand points to <strong>3</strong> (right side)</p>
+    <p>✅ Means <strong>15 minutes</strong> past the hour</p>
+    <div class="clock-grid" id="qpast-grid" style="margin-top:10px;"></div>
+  </div>
+
+  <div class="lesson" style="margin-top:14px;">
+    <h3 style="color:#FF9F43">Quarter To:</h3>
+    <p>✅ Long hand points to <strong>9</strong> (left side)</p>
+    <p>✅ Means <strong>15 minutes BEFORE</strong> the next hour</p>
+    <div class="clock-grid" id="qto-grid" style="margin-top:10px;"></div>
+    <div class="tip">Quarter to 4 = 15 minutes before 4 = 3:45</div>
+  </div>
+
+  <div style="text-align:center;margin-top:16px;">
+    <button onclick="showPage('p5')" style="padding:14px 34px;border-radius:50px;border:none;background:linear-gradient(135deg,#11998e,#38ef7d);color:#054;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;">Practice Quiz ➜ ✏️</button>
+  </div>
+</div>
+
+<!-- PAGE 5: PRACTICE -->
+<div id="p5" class="page">
+  <h2>✏️ Practice Quiz</h2>
+  <div class="score-bar">Score: <span id="quiz-score">0</span> / <span id="quiz-total">0</span> ⭐</div>
+  <div id="quiz-container"></div>
+</div>
+
+<script>
+// ── TABS ──────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs = ['p1','p2','p3','p4','p5'];
+  const idx = tabs.indexOf(id);
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+}
+
+// ── CLOCK DRAWING ─────────────────────────────────────────
+function drawClock(canvasId, h, m, size) {
+  size = size || 130;
+  const el = document.getElementById(canvasId);
+  if(!el) return;
+  const cx=size/2, cy=size/2, r=size/2-4;
+  const toR = d => d*Math.PI/180;
+  let s = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="white" stroke="#3a3a5c" stroke-width="3"/>`;
+  // Numbers
+  for(let i=1;i<=12;i++){
+    const a=toR(i*30-90);
+    s+=`<text x="${cx+Math.cos(a)*(r-14)}" y="${cy+Math.sin(a)*(r-14)+5}" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="${size>120?13:11}" fill="#3a3a5c">${i}</text>`;
+  }
+  // Tick marks
+  for(let i=0;i<60;i++){
+    const a=toR(i*6-90), len=i%5===0?8:4;
+    const x1=cx+Math.cos(a)*(r-2), y1=cy+Math.sin(a)*(r-2);
+    const x2=cx+Math.cos(a)*(r-2-len), y2=cy+Math.sin(a)*(r-2-len);
+    s+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#ccc" stroke-width="${i%5===0?2:1}"/>`;
+  }
+  // Hour hand (short, dark)
+  const ha=toR((h%12)*30+m*0.5-90);
+  const hLen=r*0.45;
+  s+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(ha)*hLen}" y2="${cy+Math.sin(ha)*hLen}" stroke="#3a3a5c" stroke-width="5" stroke-linecap="round"/>`;
+  // Minute hand (long, blue)
+  const ma=toR(m*6-90);
+  const mLen=r*0.7;
+  s+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(ma)*mLen}" y2="${cy+Math.sin(ma)*mLen}" stroke="#667eea" stroke-width="3" stroke-linecap="round"/>`;
+  // Centre dot
+  s+=`<circle cx="${cx}" cy="${cy}" r="5" fill="#3a3a5c"/>`;
+  // Labels for hands on first page
+  el.innerHTML = s;
+}
+
+function makeClockItem(containerId, h, m, label, sublabel) {
+  const div = document.createElement('div');
+  div.className = 'clock-item';
+  const svgId = 'clk_'+containerId+'_'+h+'_'+m+'_'+Math.random().toString(36).substr(2,5);
+  div.innerHTML = `<svg id="${svgId}" width="130" height="130"></svg><div class="clock-label">${label}</div><div class="clock-sublabel">${sublabel}</div>`;
+  document.getElementById(containerId).appendChild(div);
+  setTimeout(() => drawClock(svgId, h, m, 130), 0);
+}
+
+// ── BUILD LESSON CLOCKS ───────────────────────────────────
+window.addEventListener('load', () => {
+  // O'Clock
+  makeClockItem('oclock-grid', 3, 0, "3 o'clock", "Short hand → 3, Long hand → 12");
+  makeClockItem('oclock-grid', 7, 0, "7 o'clock", "Short hand → 7, Long hand → 12");
+  makeClockItem('oclock-grid', 11, 0, "11 o'clock", "Short hand → 11, Long hand → 12");
+  makeClockItem('oclock-grid', 1, 0, "1 o'clock", "Short hand → 1, Long hand → 12");
+
+  // Half Past
+  makeClockItem('halfpast-grid', 3, 30, "Half past 3", "Short hand between 3&4, Long → 6");
+  makeClockItem('halfpast-grid', 6, 30, "Half past 6", "Short hand between 6&7, Long → 6");
+  makeClockItem('halfpast-grid', 9, 30, "Half past 9", "Short hand between 9&10, Long → 6");
+  makeClockItem('halfpast-grid', 1, 30, "Half past 1", "Short hand between 1&2, Long → 6");
+
+  // Quarter Past
+  makeClockItem('qpast-grid', 3, 15, "Quarter past 3", "Long hand → 3 (right side)");
+  makeClockItem('qpast-grid', 9, 15, "Quarter past 9", "Long hand → 3 (right side)");
+
+  // Quarter To
+  makeClockItem('qto-grid', 3, 45, "Quarter to 4", "Long hand → 9 (left side)");
+  makeClockItem('qto-grid', 6, 45, "Quarter to 7", "Long hand → 9 (left side)");
+
+  // Build quiz
+  buildQuiz();
+});
+
+// ── QUIZ ─────────────────────────────────────────────────
+const QUIZ = [
+  {h:3,  m:0,  ans:"3 o'clock",      opts:["2 o'clock","3 o'clock","9 o'clock","12 o'clock"]},
+  {h:6,  m:30, ans:"half past 6",    opts:["half past 5","half past 6","6 o'clock","quarter past 6"]},
+  {h:9,  m:15, ans:"quarter past 9", opts:["quarter to 9","quarter past 9","half past 9","9 o'clock"]},
+  {h:3,  m:45, ans:"quarter to 4",   opts:["quarter past 4","quarter to 4","half past 3","quarter past 3"]},
+  {h:7,  m:0,  ans:"7 o'clock",      opts:["6 o'clock","7 o'clock","8 o'clock","5 o'clock"]},
+  {h:2,  m:30, ans:"half past 2",    opts:["half past 1","half past 2","2 o'clock","quarter past 2"]},
+  {h:4,  m:15, ans:"quarter past 4", opts:["half past 4","quarter to 4","quarter past 4","4 o'clock"]},
+  {h:10, m:45, ans:"quarter to 11",  opts:["quarter past 11","quarter to 11","half past 10","10 o'clock"]},
+  {h:5,  m:0,  ans:"5 o'clock",      opts:["4 o'clock","5 o'clock","6 o'clock","3 o'clock"]},
+  {h:11, m:30, ans:"half past 11",   opts:["11 o'clock","half past 10","half past 11","quarter past 11"]},
+  {h:1,  m:15, ans:"quarter past 1", opts:["1 o'clock","quarter to 1","half past 1","quarter past 1"]},
+  {h:8,  m:45, ans:"quarter to 9",   opts:["quarter past 8","quarter to 9","quarter to 8","half past 8"]},
+];
+
+let quizScore = 0;
+let quizTotal = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  QUIZ.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    const svgId = 'qsvg_'+i;
+    card.innerHTML = `
+      <div class="quiz-q">Q${i+1}: What time is shown on this clock?</div>
+      <div style="text-align:center;margin-bottom:12px;">
+        <svg id="${svgId}" width="140" height="140"></svg>
+      </div>
+      <div class="quiz-opts" id="qopts_${i}"></div>
+      <div class="qfb" id="qfb_${i}"></div>`;
+    container.appendChild(card);
+    setTimeout(() => drawClock(svgId, q.h, q.m, 140), 0);
+
+    // Shuffle opts
+    const opts = [...q.opts].sort(() => Math.random()-0.5);
+    const optsDiv = card.querySelector(`#qopts_${i}`);
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'qbtn';
+      btn.textContent = opt;
+      btn.addEventListener('click', function() {
+        if(this.disabled) return;
+        // Disable all
+        optsDiv.querySelectorAll('.qbtn').forEach(b => b.disabled = true);
+        const isOk = opt === q.ans;
+        if(isOk) {
+          this.classList.add('correct');
+          quizScore++;
+        } else {
+          this.classList.add('wrong');
+          // Show correct
+          optsDiv.querySelectorAll('.qbtn').forEach(b => {
+            if(b.textContent === q.ans) b.classList.add('correct');
+          });
+        }
+        quizTotal++;
+        document.getElementById('quiz-score').textContent = quizScore;
+        document.getElementById('quiz-total').textContent = quizTotal;
+        const fb = document.getElementById('qfb_'+i);
+        fb.className = 'qfb show ' + (isOk?'c':'w');
+        fb.textContent = isOk ? '✅ Brilliant! You got it right! 🌟' : `❌ Not quite — the answer is: ${q.ans}`;
+      });
+      optsDiv.appendChild(btn);
+    });
+  });
+}
+</script>
+</body>
+</html>
